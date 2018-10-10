@@ -1,13 +1,15 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import MainContainer from './Containers/MainContainer'
+
+import {Switch, Route} from 'react-router-dom'
 
 class App extends Component {
   render() {
     return (
-      <Fragment>
-        <MainContainer/>
-      </Fragment>
+      <Switch>
+        <Route path='/' exact render={(props) => <MainContainer {...props}/>}/>
+      </Switch>
     );
   }
 }
