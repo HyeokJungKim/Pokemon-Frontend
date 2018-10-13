@@ -17,10 +17,17 @@
 const initState = {
   userToken: "",
   pokemons: [],
+  trainer: {}
 }
 
 export const reducer = (state = initState, action) => {
   switch (action.type) {
+    case "INITIALIZE_TRAINER":
+      return {...state, trainer: action.payload, userToken: "ab"};
+    case "INITIALIZE_POKEMONS":
+      return {...state, pokemons: action.payload}
+    case "RESET_STATE":
+      return initState
     default:
       return state;
   }
