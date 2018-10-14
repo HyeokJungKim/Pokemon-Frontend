@@ -7,10 +7,10 @@ import LogoutNavbar from '../Components/LogoutNavbar'
 import {connect} from 'react-redux'
 import {initializeState, resetState} from '../Redux/Actions'
 
-class NavBar extends Component {
+class NavBarContainer extends Component {
 
   goLogin = () => {
-    this.props.initializeState()
+    // this.props.initializeState()
     this.props.history.push("/login")
   }
 
@@ -56,4 +56,4 @@ const mapStateToProps = (state) => {
   return {userToken: state.userToken}
 }
 
-export default connect(mapStateToProps, {initializeState, resetState})(NavBar);
+export default connect(mapStateToProps, {initializeState, resetState})(NavBarContainer);

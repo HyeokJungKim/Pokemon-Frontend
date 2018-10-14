@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Header } from 'semantic-ui-react'
 
-class AboutContainer extends Component {
+class About
+ extends Component {
 
   render() {
     return (
@@ -17,4 +18,4 @@ class AboutContainer extends Component {
 
 }
 
-export default AboutContainer;
+export default About;

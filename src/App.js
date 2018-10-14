@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
 import './App.css';
-import LoginContainer from './Containers/LoginContainer'
-import GameContainer from './Containers/GameContainer'
 
+import {connect} from 'react-redux'
 
-import {Switch, Route} from 'react-router-dom'
+import HomeContainer from './Containers/HomeContainer'
+import FormContainer from './Containers/FormContainer'
+
+import {Switch, Route, withRouter} from 'react-router-dom'
 
 class App extends Component {
+
   render() {
     return (
       <Switch>
-        <Route path='/login' render={(props) => <GameContainer {...props}/>}/>
-        <Route path='/' exact render={(props) => <LoginContainer {...props}/>}/>
+        <Route path='/login' render={(props) => <FormContainer {...props}/>}/>
+        <Route path='/register' render={(props) => <FormContainer {...props}/>}/>
 
+        <Route path='/' exact render={(props) => <HomeContainer {...props}/>}/>
       </Switch>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {userToken: state.userToken}
+}
+
+export default withRouter(connect(mapStateToProps)(App))

@@ -1,16 +1,16 @@
 import React, { Component} from 'react';
 import NavBarContainer from './NavBarContainer'
-import AboutContainer from './AboutContainer'
+import About from '../Components/About'
 import { Segment, Container } from 'semantic-ui-react'
 
-class LoginContainer extends Component {
+class HomeContainer extends Component {
 
   render() {
     return (
       <Segment basic>
         <NavBarContainer {...this.props}/>
         <Container fluid>
-          <AboutContainer/>
+          <About/>
         </Container>
       </Segment>
     );
@@ -18,4 +18,4 @@ class LoginContainer extends Component {
 
 }
 
-export default LoginContainer;
+export default HomeContainer;
