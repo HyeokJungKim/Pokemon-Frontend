@@ -5,12 +5,11 @@ import LoginNavbar from '../Components/LoginNavbar'
 import LogoutNavbar from '../Components/LogoutNavbar'
 
 import {connect} from 'react-redux'
-import {initializeState, resetState} from '../Redux/Actions'
+import {resetState} from '../Redux/Actions'
 
 class NavBarContainer extends Component {
 
   goLogin = () => {
-    // this.props.initializeState()
     this.props.history.push("/login")
   }
 
@@ -23,8 +22,8 @@ class NavBarContainer extends Component {
   }
 
   goLogout = () => {
-    this.props.resetState()
     this.props.history.push("/")
+    this.props.resetState()
   }
 
   render() {
@@ -56,4 +55,4 @@ const mapStateToProps = (state) => {
   return {userToken: state.userToken}
 }
 
-export default connect(mapStateToProps, {initializeState, resetState})(NavBarContainer);
+export default connect(mapStateToProps, {resetState})(NavBarContainer);

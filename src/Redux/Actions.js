@@ -1,8 +1,8 @@
 import TrainerAdapter from "../Adapters/TrainerAdapter"
 
-export const initializeState = () => {
+export const login = (data) => {
   return (dispatch) => {
-    TrainerAdapter.login()
+    TrainerAdapter.login(data)
     .then(json => {
       const pokemons = json.included.map((pokemon) => {
         return pokemon.attributes

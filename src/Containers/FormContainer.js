@@ -9,7 +9,6 @@ import NavBarContainer from './NavBarContainer'
 class FormContainer extends Component {
 
   render() {
-    console.log(this.props);
     return (
       <Segment basic>
         <NavBarContainer {...this.props}/>
