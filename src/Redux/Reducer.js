@@ -16,6 +16,7 @@
 
 const initState = {
   userToken: "",
+  loading: false,
   pokemons: [],
   trainer: {},
 }
@@ -23,9 +24,13 @@ const initState = {
 export const reducer = (state = initState, action) => {
   switch (action.type) {
     case "INITIALIZE_TRAINER":
-      return {...state, trainer: action.payload, userToken: "CHANGE ME"};
+      return {...state, trainer: action.payload};
     case "INITIALIZE_POKEMONS":
       return {...state, pokemons: action.payload}
+    case "INITIALIZE_TOKEN":
+      return {...state, userToken: action.payload}
+    case "TOGGLE_LOADING":
+      return {...state, loading: !state.loading}
     case "RESET_STATE":
       return initState
     default:

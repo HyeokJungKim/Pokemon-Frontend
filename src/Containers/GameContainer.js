@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import NavBarContainer from './NavBarContainer'
 import CanvasContainer from './CanvasContainer'
+
+import WithAuth from '../Auth/WithAuth'
 import { Segment, Container } from 'semantic-ui-react'
 
 class GameContainer extends Component {
@@ -18,4 +20,4 @@ class GameContainer extends Component {
 
 }
 
-export default GameContainer;
+export default WithAuth(GameContainer);

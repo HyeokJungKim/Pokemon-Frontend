@@ -18,7 +18,11 @@ class NavBarContainer extends Component {
   }
 
   goHome = () => {
-    this.props.history.push("/")
+    if(this.props.userToken){
+      this.props.history.push("/home")
+    } else {
+      this.props.history.push("/")
+    }
   }
 
   goLogout = () => {

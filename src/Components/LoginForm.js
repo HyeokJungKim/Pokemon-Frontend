@@ -3,7 +3,7 @@ import {Segment, Container, Form, Input, Button, Header} from 'semantic-ui-react
 
 import TrainerAdapter from "../Adapters/TrainerAdapter"
 
-import {initializeTrainer, initializePokemons} from '../Redux/Actions'
+import {initializeToken, login} from '../Redux/Actions'
 import {connect} from 'react-redux'
 
 const initialState = {
@@ -30,8 +30,10 @@ class LoginForm extends Component {
       if(json.error){
         this.setState({error: json.error})
       }else{
-        this.props.initializeTrainer(json.data.attributes)
-        this.props.initializePokemons(json.included.map((pokemon) => pokemon.attributes))
+        localStorage.setItem("token", json.token)
+        this.props.initializeToken(json.token)
+        this.props.login(json.id, json.token)
+        this.props.history.push("/home")
       }
     })
     this.setState(initialState)
@@ -61,5 +63,4 @@ class LoginForm extends Component {
 
 }
 
-
-export default connect(null, {initializeTrainer, initializePokemons})(LoginForm);
+export default connect(null, {initializeToken, login})(LoginForm);

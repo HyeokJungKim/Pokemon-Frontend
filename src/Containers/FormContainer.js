@@ -13,7 +13,7 @@ class FormContainer extends Component {
       <Segment basic>
         <NavBarContainer {...this.props}/>
         <Container fluid>
-          {this.props.location.pathname === "/login" ? <LoginForm/> : <RegisterForm/>}
+          {this.props.location.pathname === "/login" ? <LoginForm {...this.props}/> : <RegisterForm/>}
         </Container>
       </Segment>
     );

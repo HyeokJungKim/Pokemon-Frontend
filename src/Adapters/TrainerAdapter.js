@@ -8,7 +8,32 @@ class TrainerAdapter{
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify({trainer: data})
+    })
+    .then(res => res.json())
+  }
+
+  static persist(token){
+    return fetch(`${API}/trainers/persist`, {
+      method: "GET",
+      headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token
+      }
+    })
+    .then(res => res.json())
+  }
+
+
+  static initialize(id, token){
+    return fetch(`${API}/trainers/${id}`, {
+      method: "GET",
+      headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token
+      }
     })
     .then(res => res.json())
   }

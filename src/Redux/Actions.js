@@ -1,14 +1,31 @@
 import TrainerAdapter from "../Adapters/TrainerAdapter"
 
-export const login = (data) => {
+export const login = (id, token) => {
   return (dispatch) => {
-    TrainerAdapter.login(data)
+    TrainerAdapter.initialize(id, token)
     .then(json => {
-      const pokemons = json.included.map((pokemon) => {
-        return pokemon.attributes
-      })
-      dispatch(initializeTrainer(json.data.attributes))
-      dispatch(initializePokemons(pokemons))
+      if(json.error){
+        dispatch(resetState())
+      }else{
+        dispatch(initializeTrainer(json.data.attributes))
+        dispatch(initializePokemons(json.included.map(pokemon => pokemon.attributes)))
+      }
+    })
+  }
+}
+
+export const persist = (token) => {
+  return (dispatch) => {
+    TrainerAdapter.persist(token)
+    .then(json => {
+      if(json.error){
+        dispatch(resetState())
+      }else{
+        dispatch(initializeToken(token))
+        dispatch(initializeTrainer(json.data.attributes))
+        dispatch(initializePokemons(json.included.map(pokemon => pokemon.attributes)))
+        dispatch(toggleLoading())
+      }
     })
   }
 }
@@ -27,7 +44,21 @@ export const initializePokemons = (pokemons) => {
   }
 }
 
+export const initializeToken = (token) => {
+  return {
+    type: "INITIALIZE_TOKEN",
+    payload: token
+  }
+}
+
+export const toggleLoading = () => {
+  return{
+    type: "TOGGLE_LOADING"
+  }
+}
+
 export const resetState = () => {
+  localStorage.clear()
   return{
     type: "RESET_STATE"
   }
