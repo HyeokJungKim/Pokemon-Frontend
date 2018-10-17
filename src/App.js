@@ -13,8 +13,9 @@ class App extends Component {
 
   componentDidMount() {
     if(localStorage.getItem('token')){
-      this.props.toggleLoading()
       this.props.persist(localStorage.getItem('token'))
+    } else {
+      this.props.toggleLoading(false)
     }
   }
 

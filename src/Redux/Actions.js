@@ -22,9 +22,9 @@ export const persist = (token) => {
         dispatch(resetState())
       }else{
         dispatch(initializeToken(token))
+        dispatch(toggleLoading(false))
         dispatch(initializeTrainer(json.data.attributes))
         dispatch(initializePokemons(json.included.map(pokemon => pokemon.attributes)))
-        dispatch(toggleLoading())
       }
     })
   }
@@ -51,9 +51,10 @@ export const initializeToken = (token) => {
   }
 }
 
-export const toggleLoading = () => {
+export const toggleLoading = (bool) => {
   return{
-    type: "TOGGLE_LOADING"
+    type: "TOGGLE_LOADING",
+    payload: bool
   }
 }
 

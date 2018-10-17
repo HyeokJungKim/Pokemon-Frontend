@@ -16,7 +16,7 @@
 
 const initState = {
   userToken: "",
-  loading: false,
+  loading: true,
   pokemons: [],
   trainer: {},
 }
@@ -30,7 +30,7 @@ export const reducer = (state = initState, action) => {
     case "INITIALIZE_TOKEN":
       return {...state, userToken: action.payload}
     case "TOGGLE_LOADING":
-      return {...state, loading: !state.loading}
+      return {...state, loading: action.payload}
     case "RESET_STATE":
       return initState
     default:
