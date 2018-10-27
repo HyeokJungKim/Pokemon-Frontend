@@ -22,7 +22,7 @@ class ListContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {pokemons: state.pokemons}
+  return {pokemons: state.trainer.pokemons}
 }
 
 export default connect(mapStateToProps)(ListContainer);

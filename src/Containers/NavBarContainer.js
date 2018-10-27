@@ -56,7 +56,7 @@ class NavBarContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {userToken: state.userToken}
+  return {userToken: state.auth.userToken}
 }
 
 export default connect(mapStateToProps, {resetState})(NavBarContainer);

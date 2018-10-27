@@ -8,12 +8,16 @@ import 'semantic-ui-css/semantic.min.css';
 
 import { BrowserRouter as Router} from 'react-router-dom'
 
-import {createStore, applyMiddleware} from 'redux'
+import {createStore, applyMiddleware, combineReducers} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
-import {reducer} from './Redux/Reducer'
+import trainerReducer from './Redux/TrainerReducer'
+import authReducer from './Redux/AuthReducer'
+import pokemonReducer from './Redux/PokemonReducer'
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const rootReducer = combineReducers({trainer: trainerReducer, auth: authReducer, pokemons: pokemonReducer})
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render(
   <Provider store={store}>

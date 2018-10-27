@@ -3,6 +3,7 @@ import {Segment, Grid} from 'semantic-ui-react'
 
 import ListContainer from './ListContainer'
 import Canvas from '../Components/Canvas'
+
 class CanvasContainer extends Component {
 
   render() {

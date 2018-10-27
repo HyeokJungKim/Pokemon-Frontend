@@ -32,7 +32,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {userToken: state.userToken}
+  return {userToken: state.auth.userToken}
 }
 
 export default withRouter(connect(mapStateToProps,{persist, toggleLoading})(App))

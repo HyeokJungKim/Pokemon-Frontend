@@ -20,8 +20,8 @@ const WithAuth = (WrappedComponent) => {
 
 const mapStateToProps = (state) => {
   return {
-    userToken: state.userToken,
-    loading: state.loading
+    userToken: state.auth.userToken,
+    loading: state.auth.loading
   }
 }
 

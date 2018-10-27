@@ -64,3 +64,10 @@ export const resetState = () => {
     type: "RESET_STATE"
   }
 }
+
+export const getAllPokemons = (pokemonArr) => {
+  return {
+    type: "INITIALIZE_ALL",
+    payload: pokemonArr
+  }
+}

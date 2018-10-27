@@ -15,25 +15,21 @@
 // RootReducer.getState() = hobbitState: {//STATE OF HOBBIT}
 
 const initState = {
-  userToken: "",
-  loading: true,
   pokemons: [],
   trainer: {},
 }
 
-export const reducer = (state = initState, action) => {
+const trainerReducer = (state = initState, action) => {
   switch (action.type) {
     case "INITIALIZE_TRAINER":
-      return {...state, trainer: action.payload};
+      return {...state, trainer: action.payload}
     case "INITIALIZE_POKEMONS":
       return {...state, pokemons: action.payload}
-    case "INITIALIZE_TOKEN":
-      return {...state, userToken: action.payload}
-    case "TOGGLE_LOADING":
-      return {...state, loading: action.payload}
     case "RESET_STATE":
       return initState
     default:
-      return state;
+      return state
   }
 }
+
+export default trainerReducer
