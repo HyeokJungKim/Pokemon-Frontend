@@ -87,5 +87,205 @@ body{
   float: left;
   width: 2.5vw;
   height: 2.5vw;
-  background-color: blue;
+  background-size: cover;
+}
+
+.trainer{
+  background-image: url("./Images/Trainer.png");
+}
+
+.CenterGrass{
+  background-image: url("./Images/CenterGrass.png");
+}
+.BotGrass{
+  background-image: url("./Images/BotGrass.png");
+}
+.GrassHorizontal{
+  background-image: url("./Images/GrassHorizontal.png");
+}
+.TLGrass{
+  background-image: url("./Images/TLGrass.png");
+}
+.TopGrass{
+  background-image: url("./Images/TopGrass.png");
+}
+.TRGrass{
+  background-image: url("./Images/TRGrass.png");
+}
+.BRGrass{
+  background-image: url("./Images/BRGrass.png");
+}
+.BLGrass{
+  background-image: url("./Images/BLGrass.png");
+}
+.RightGrass{
+  background-image: url("./Images/RightGrass.png");
+}
+.LeftGrass{
+  background-image: url("./Images/LeftGrass.png");
+}
+.GrassML{
+  background-image: url("./Images/GrassML.png");
+}
+.Water{
+  background-image: url("./Images/Water.png");
+}
+.WaterfallTop{
+  background-image: url("./Images/WaterfallTop.png");
+}
+.WaterfallBot{
+  background-image: url("./Images/WaterfallBot.png");
+}
+.WaterTopRock{
+  background-image: url("./Images/WaterTopRock.png");
+}
+
+.Bridge{
+  background-image: url("./Images/Bridge.png");
+}
+.SFlowers{
+  background-image: url("./Images/SFlowers.png");
+}
+.HRoad{
+  background-image: url("./Images/HRoad.png");
+}
+.VRoad{
+  background-image: url("./Images/VRoad.png");
+}
+.EndRoad{
+  background-image: url("./Images/EndRoad.png");
+}
+.BRRoad{
+  background-image: url("./Images/BRRoad.png");
+}
+.TreeLBase{
+  background-image: url("./Images/TreeLBase.png");
+}
+.TreeRBase{
+  background-image: url("./Images/TreeRBase.png");
+}
+.TreeLMid{
+  background-image: url("./Images/TreeLMid.png");
+}
+.TreeRMid{
+  background-image: url("./Images/TreeRMid.png");
+}
+
+.TempleBot{
+  background-image: url("./Images/TempleBot.png");
+}
+.TempleWall{
+  background-image: url("./Images/TempleWall.png");
+}
+.TempleBL{
+  background-image: url("./Images/TempleBL.png");
+}
+.TempleBR{
+  background-image: url("./Images/TempleBR.png");
+}
+.TempleR{
+  background-image: url("./Images/TempleR.png");
+}
+.TempleL{
+  background-image: url("./Images/TempleL.png");
+}
+.TempleWindow{
+  background-image: url("./Images/TempleWindow.png");
+}
+.TempleDoor{
+  background-image: url("./Images/TempleDoor.png");
+}
+.TempleSymbol{
+  background-image: url("./Images/TempleSymbol.png");
+}
+
+
+.PinkFlowers{
+  background-image: url("./Images/PinkFlowers.png");
+}
+.PinkFlowers2{
+  background-image: url("./Images/PinkFlowers2.png");
+}
+.PinkFlowers3{
+  background-image: url("./Images/PinkFlowers3.png");
+}
+
+.StairTL{
+  background-image: url("./Images/StairTL.png");
+}
+.StairTop{
+  background-image: url("./Images/StairTop.png");
+}
+.StairBot{
+  background-image: url("./Images/StairBot.png");
+}
+.StairL{
+  background-image: url("./Images/StairL.png");
+}
+.StairR{
+  background-image: url("./Images/StairR.png");
+}
+.StairTR{
+  background-image: url("./Images/StairTR.png");
+}
+.StairBL{
+  background-image: url("./Images/StairBL.png");
+}
+.StairBR{
+  background-image: url("./Images/StairBR.png");
+}
+
+.Rock{
+  background-image: url("./Images/Rock.png");
+}
+
+.SandB{
+  background-image: url("./Images/SandB.png");
+}
+.SandGrassT{
+  background-image: url("./Images/SandGrassT.png");
+}
+.SandGrassTL{
+  background-image: url("./Images/SandGrassTL.png");
+}
+.SandGrassTR{
+  background-image: url("./Images/SandGrassTR.png");
+}
+.SandGrassTR2{
+  background-image: url("./Images/SandGrassTR2.png");
+}
+
+.SandGrassL{
+  background-image: url("./Images/SandGrassL.png");
+}
+.SandGrassR{
+  background-image: url("./Images/SandGrassR.png");
+}
+.SandGrassBL{
+  background-image: url("./Images/SandGrassBL.png");
+}
+.SandGrassBR{
+  background-image: url("./Images/SandGrassBR.png");
+}
+.SandTR{
+  background-image: url("./Images/SandTR.png");
+}
+.SandBL{
+  background-image: url("./Images/SandBL.png");
+}
+.SandWaterB{
+  background-image: url("./Images/SandWaterB.png");
+}
+.SandWaterBL{
+  background-image: url("./Images/SandWaterBL.png");
+}
+.SandTR2{
+  background-image: url("./Images/SandTR2.png");
+}
+.SandT{
+  background-image: url("./Images/SandT.png");
+}
+
+.ShadowWater{
+  background-image: url("./Images/ShadowWater.png");
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Segment, Grid} from 'semantic-ui-react'
 
 import ListContainer from './ListContainer'
-import Canvas from './Canvas'
+import Canvas from '../Components/Canvas'
 class CanvasContainer extends Component {
 
   render() {
