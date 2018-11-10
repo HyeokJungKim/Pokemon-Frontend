@@ -71,3 +71,9 @@ export const getAllPokemons = (pokemonArr) => {
     payload: pokemonArr
   }
 }
+
+export const getRandom = () => {
+  return {
+    type: "GET_RANDOM"
+  }
+}

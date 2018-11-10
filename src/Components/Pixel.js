@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { PureComponent } from 'react';
 
-const Pixel = ({name}) => {
-  // <div className={`pixel trainer`}></div>
-  return(<div className={`pixel ${name}`}>
-  </div>);
+class Pixel extends PureComponent {
+
+  render() {
+    return (
+      <div className={`pixel ${this.props.name}`}/>
+    );
+  }
+
 }
-export default Pixel
+
+export default Pixel;

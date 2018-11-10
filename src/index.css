@@ -124,9 +124,6 @@ body{
 .LeftGrass{
   background-image: url("./Images/LeftGrass.png");
 }
-.GrassML{
-  background-image: url("./Images/GrassML.png");
-}
 .Water{
   background-image: url("./Images/Water.png");
 }
@@ -143,6 +140,31 @@ body{
 .Bridge{
   background-image: url("./Images/Bridge.png");
 }
+.BridgeEndL{
+  background-image: url("./Images/BridgeEndL.png");
+}
+.BridgeEndR{
+  background-image: url("./Images/BridgeEndR.png");
+}
+.BridgeWater{
+  background-image: url("./Images/BridgeWater.png");
+}
+.BridgeWater2{
+  background-image: url("./Images/BridgeWater2.png");
+}
+.BridgeWater3{
+  background-image: url("./Images/BridgeWater3.png");
+}
+.VBridge{
+  background-image: url("./Images/VBridge.png");
+}
+.CenterBridge{
+  background-image: url("./Images/CenterBridge.png");
+}
+.BotBridge{
+  background-image: url("./Images/BotBridge.png");
+}
+
 .SFlowers{
   background-image: url("./Images/SFlowers.png");
 }
@@ -151,9 +173,6 @@ body{
 }
 .VRoad{
   background-image: url("./Images/VRoad.png");
-}
-.EndRoad{
-  background-image: url("./Images/EndRoad.png");
 }
 .BRRoad{
   background-image: url("./Images/BRRoad.png");
@@ -177,15 +196,11 @@ body{
 .TempleWall{
   background-image: url("./Images/TempleWall.png");
 }
-.TempleBL{
-  background-image: url("./Images/TempleBL.png");
-}
+
 .TempleBR{
   background-image: url("./Images/TempleBR.png");
 }
-.TempleR{
-  background-image: url("./Images/TempleR.png");
-}
+
 .TempleL{
   background-image: url("./Images/TempleL.png");
 }
@@ -200,9 +215,6 @@ body{
 }
 
 
-.PinkFlowers{
-  background-image: url("./Images/PinkFlowers.png");
-}
 .PinkFlowers2{
   background-image: url("./Images/PinkFlowers2.png");
 }
@@ -239,9 +251,6 @@ body{
   background-image: url("./Images/Rock.png");
 }
 
-.SandB{
-  background-image: url("./Images/SandB.png");
-}
 .SandGrassT{
   background-image: url("./Images/SandGrassT.png");
 }
@@ -288,4 +297,35 @@ body{
 
 .ShadowWater{
   background-image: url("./Images/ShadowWater.png");
+}
+
+.DarkWater{
+  background-image: url("./Images/DarkWater.png");
+}
+.DarkWaterT{
+  background-image: url("./Images/DarkWaterT.png");
+}
+.DarkWaterTR{
+  background-image: url("./Images/DarkWaterTR.png");
+}
+.DarkWaterB{
+  background-image: url("./Images/DarkWaterB.png");
+}
+.DarkWaterR{
+  background-image: url("./Images/DarkWaterR.png");
+}
+.DarkWaterL{
+  background-image: url("./Images/DarkWaterL.png");
+}
+.DarkWaterBR{
+  background-image: url("./Images/DarkWaterBR.png");
+}
+.DarkWaterTL2{
+  background-image: url("./Images/DarkWaterTL2.png");
+}
+.DarkWaterTR2{
+  background-image: url("./Images/DarkWaterTR2.png");
+}
+.DarkWaterBL2{
+  background-image: url("./Images/DarkWaterBL2.png");
 }
