@@ -1,3 +1,24 @@
+:root{
+  --Normal: #A8A77A;
+  --Flying: #A98FF3;
+  --Poison: #A33EA1;
+  --Fire: #EE8130;
+  --Electric: #F7D02C;
+  --Water: #6390F0;
+  --Grass: #7AC74C;
+  --Ice: #96D9D6;
+  --Ground: #E2BF65;
+  --Fighting: #C22E28;
+  --Psychic: #F95587;
+  --Bug: #A6B91A;
+  --Rock: #B6A136;
+  --Ghost: #735797;
+  --Dragon: #6F35FC;
+  --Dark: #705746;
+  --Steel: #B7B7CE;
+  --Fairy: #D685AD;
+}
+
 body{
   padding: .5% 1.5% 1.5% 0% !important;
 }
@@ -21,66 +42,64 @@ body{
 }
 
 .item.Normal{
-  border-left: 2px solid #A8A77A;
+  border-left: 2px solid var(--Normal);
 }
 .item.Flying{
-  border-left: 2px solid #A98FF3;
+  border-left: 2px solid var(--Flying);
 }
 .item.Poison{
-  border-left: 2px solid #A33EA1;
+  border-left: 2px solid var(--Poison);
 }
 .item.Fire{
-  border-left: 2px solid #EE8130;
+  border-left: 2px solid var(--Fire);
 }
 .item.Electric{
-  border-left: 2px solid #F7D02C;
+  border-left: 2px solid var(--Electric);
 }
 .item.Water{
-  border-left: 2px solid #6390F0;
+  border-left: 2px solid var(--Water);
 }
 .item.Grass{
-  border-left: 2px solid #7AC74C;
+  border-left: 2px solid var(--Grass);
 }
 .item.Ice{
-  border-left: 2px solid #96D9D6;
+  border-left: 2px solid var(--Ice);
 }
 .item.Ground{
-  border-left: 2px solid #E2BF65;
+  border-left: 2px solid var(--Ground);
 }
 .item.Fighting{
-  border-left: 2px solid #C22E28;
+  border-left: 2px solid var(--Fighting);
 }
 .item.Psychic{
-  border-left: 2px solid #F95587;
+  border-left: 2px solid var(--Psychic);
 }
 .item.Bug{
-  border-left: 2px solid #A6B91A;
+  border-left: 2px solid var(--Bug);
 }
 .item.Rock{
-  border-left: 2px solid #B6A136;
+  border-left: 2px solid var(--Rock);
 }
 .item.Ghost{
-  border-left: 2px solid #735797;
-
+  border-left: 2px solid var(--Ghost);
 }
 .item.Dragon{
-  border-left: 2px solid #6F35FC;
+  border-left: 2px solid var(--Dragon);
 }
 .item.Dark{
-  border-left: 2px solid #705746;
+  border-left: 2px solid var(--Dark);
 }
 .item.Steel{
-  border-left: 2px solid #B7B7CE;
+  border-left: 2px solid var(--Steel);
 }
 .item.Fairy{
-  border-left: 2px solid #D685AD;
+  border-left: 2px solid var(--Fairy);
 }
 
 #canvas{
   margin: auto;
   width: 40vw;
   height: 40vw;
-  background-color: red;
 }
 
 .pixel{
@@ -89,6 +108,70 @@ body{
   height: 2.5vw;
   background-size: cover;
 }
+
+.type{
+  margin: 2%;
+  padding: 1%;
+  border-radius: 20px;
+  display: inline-block;
+  width: 25%;
+}
+
+.type.Normal{
+  background-color: var(--Normal);
+}
+.type.Flying{
+  background-color: var(--Flying);
+}
+.type.Poison{
+  background-color: var(--Poison);
+}
+.type.Fire{
+  background-color: var(--Fire);
+}
+.type.Electric{
+  background-color: var(--Electric);
+}
+.type.Water{
+  background-color: var(--Water);
+}
+.type.Grass{
+  background-color: var(--Grass);
+}
+.type.Ice{
+  background-color: var(--Ice);
+}
+.type.Ground{
+  background-color: var(--Ground);
+}
+.type.Fighting{
+  background-color: var(--Fighting);
+}
+.type.Psychic{
+  background-color: var(--Psychic);
+}
+.type.Bug{
+  background-color: var(--Bug);
+}
+.type.Rock{
+  background-color: var(--Rock);
+}
+.type.Ghost{
+  background-color: var(--Ghost);
+}
+.type.Dragon{
+  background-color: var(--Dragon);
+}
+.type.Dark{
+  background-color: var(--Dark);
+}
+.type.Steel{
+  background-color: var(--Steel);
+}
+.type.Fairy{
+  background-color: var(--Fairy);
+}
+
 
 .trainer{
   background-image: url("./Images/Trainer.png");
@@ -247,7 +330,7 @@ body{
   background-image: url("./Images/StairBR.png");
 }
 
-.Rock{
+.GrassRock{
   background-image: url("./Images/Rock.png");
 }
 

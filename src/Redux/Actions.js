@@ -77,3 +77,16 @@ export const getRandom = () => {
     type: "GET_RANDOM"
   }
 }
+
+export const runAway = () => {
+  return {
+    type: "RUN_AWAY"
+  }
+}
+
+export const catchPokemon = (pokemon) => {
+  return {
+    type: "CATCH_POKEMON",
+    payload: pokemon
+  }
+}

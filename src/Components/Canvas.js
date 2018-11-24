@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Segment } from 'semantic-ui-react'
+
+import NewPokemon from './NewPokemon'
 import Pixel from './Pixel'
 import PixelTrainer from './PixelTrainer'
 
+import {connect} from 'react-redux'
+import {getRandom} from '../Redux/Actions'
 
 class Canvas extends Component {
 
@@ -14,7 +18,7 @@ class Canvas extends Component {
         "TLGrass", "TopGrass", "TRGrass", "CenterWater", "TLGrass", "TopGrass", "VRoad", "TopGrass", "TreeLMid", "TreeRMid", "TempleWall", "TempleWall", "TempleWall", "TempleWall", "TempleSymbol", "TempleBot",
         "HRoad", "HRoad", "HRoad", "Bridge", "HRoad", "HRoad", "BRRoad", "BotGrass", "TreeLBase", "TreeRBase", "TempleBot", "TempleWindow", "TempleDoor", "TempleBR", "SFlowers", "RightGrass",
         "BLGrass", "BotGrass", "BRGrass", "CenterWater", "BLGrass","StairTL","StairTR","TempleBot","TempleWall","TempleWall","CenterGrass","CenterGrass","CenterGrass","CenterGrass","CenterGrass","CenterGrass",
-        "TempleL","TempleWall","TempleWall","WaterfallTop","TempleWall","StairL","StairR","Rock","TempleBot","TempleBot","CenterGrass","CenterGrass","CenterGrass","CenterGrass","BotGrass","BotGrass",
+        "TempleL","TempleWall","TempleWall","WaterfallTop","TempleWall","StairL","StairR","GrassRock","TempleBot","TempleBot","CenterGrass","CenterGrass","CenterGrass","CenterGrass","BotGrass","BotGrass",
         "TempleBot","TempleBot","TempleBot","WaterfallBot","GrassHorizontal","StairL","StairR","BRGrass","LeftGrass","CenterGrass","CenterGrass","CenterGrass","CenterGrass","RightGrass","WaterTopRock","WaterTopRock",
         "LeftGrass","CenterGrass","PinkFlowers2","CenterWater","TempleBot","StairL","StairR","TempleBot","LeftGrass","CenterGrass","CenterGrass","CenterGrass","CenterGrass","RightGrass","CenterWater","TLGrass",
         "BLGrass","CenterGrass","PinkFlowers2","CenterWater","LeftGrass","StairBL","StairBR","CenterGrass","CenterGrass","CenterGrass","CenterGrass","CenterGrass","CenterGrass","RightGrass","CenterWater","LeftGrass",
@@ -39,46 +43,59 @@ class Canvas extends Component {
     document.removeEventListener("keydown", this.moveTrainer, false)
   }
 
-  moveTrainer = (e) => {
-    const position = this.state.trainer
-    const modulo = position % 16
-    switch (e.code) {
-      case "KeyW":
-        if(position > 15 ){
-          this.setState((prevState) =>
-            {return {trainer: prevState.trainer - 16}}
-          )
-        }
-        break;
-      case "KeyS":
-        if(position < 240){
-          this.setState((prevState) =>
-            {return {trainer: prevState.trainer + 16}}
-          )
-        }
-        break;
-      case "KeyA":
-        if(modulo !== 0){
-          this.setState((prevState) =>
-            {return {trainer: prevState.trainer - 1}}
-          )
-        }
-        break;
-      case "KeyD":
-        if(modulo !== 15){
-          this.setState((prevState) =>
-            {return {trainer: prevState.trainer + 1}}
-          )
-        }
-        break;
-      default:
-        break;
+  findRandom = (position) => {
+    if(Math.random() < 0.25){
+      this.props.getRandom()
+      this.setState((prevState) =>
+        {return {trainer: prevState.trainer + position}}
+      )
     }
+  }
+
+  moveTrainer = (e) => {
+    if(!this.props.displayedPokemon.name){
+      const position = this.state.trainer
+      const modulo = position % 16
+      switch (e.code) {
+        case "KeyW":
+          if(position > 15 ){
+            this.setState((prevState) =>
+              {return {trainer: prevState.trainer - 16}}, this.findRandom(16)
+            )
+          }
+          break;
+        case "KeyS":
+          if(position < 240){
+            this.setState((prevState) =>
+              {return {trainer: prevState.trainer + 16}}, this.findRandom(-16)
+            )
+          }
+          break;
+        case "KeyA":
+          if(modulo !== 0){
+            this.setState((prevState) =>
+              {return {trainer: prevState.trainer - 1}}, this.findRandom(1)
+            )
+          }
+          break;
+        case "KeyD":
+          if(modulo !== 15){
+            this.setState((prevState) =>
+              {return {trainer: prevState.trainer + 1}}, this.findRandom(-1)
+            )
+          }
+          break;
+        default:
+          break;
+      }
+    }
+
   }
 
   render() {
     return (
       <Segment basic>
+        {!this.props.displayedPokemon.name ?
         <div id="canvas">
         {this.state.blueprint.map((name,index)=> {
           if(index === this.state.trainer){
@@ -88,10 +105,19 @@ class Canvas extends Component {
           }
         })}
         </div>
+          :
+        <NewPokemon/>
+        }
       </Segment>
     )
   }
 
 }
 
-export default Canvas;
+const mapStateToProps = ({pokemons}) => {
+  return {
+    displayedPokemon: pokemons.displayedPokemon
+  }
+}
+
+export default connect(mapStateToProps, {getRandom})(Canvas);

@@ -3,7 +3,6 @@ import {Segment, Grid} from 'semantic-ui-react'
 
 import ListContainer from './ListContainer'
 import Canvas from '../Components/Canvas'
-import NewPokemon from '../Components/NewPokemon'
 
 class CanvasContainer extends Component {
 
@@ -13,7 +12,6 @@ class CanvasContainer extends Component {
         <Grid>
           <Grid.Row>
             <Grid.Column width={10}>
-              <NewPokemon/>
               <Canvas/>
             </Grid.Column>
             <Grid.Column width={6}>
