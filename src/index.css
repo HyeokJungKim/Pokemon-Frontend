@@ -20,59 +20,59 @@ body{
   margin-bottom: 2%;
 }
 
-.item.normal{
+.item.Normal{
   border-left: 2px solid #A8A77A;
 }
-.item.flying{
+.item.Flying{
   border-left: 2px solid #A98FF3;
 }
-.item.poison{
+.item.Poison{
   border-left: 2px solid #A33EA1;
 }
-.item.fire{
+.item.Fire{
   border-left: 2px solid #EE8130;
 }
-.item.electric{
+.item.Electric{
   border-left: 2px solid #F7D02C;
 }
-.item.water{
+.item.Water{
   border-left: 2px solid #6390F0;
 }
-.item.grass{
+.item.Grass{
   border-left: 2px solid #7AC74C;
 }
-.item.ice{
+.item.Ice{
   border-left: 2px solid #96D9D6;
 }
-.item.ground{
+.item.Ground{
   border-left: 2px solid #E2BF65;
 }
-.item.fighting{
+.item.Fighting{
   border-left: 2px solid #C22E28;
 }
-.item.psychic{
+.item.Psychic{
   border-left: 2px solid #F95587;
 }
-.item.bug{
+.item.Bug{
   border-left: 2px solid #A6B91A;
 }
-.item.rock{
+.item.Rock{
   border-left: 2px solid #B6A136;
 }
-.item.ghost{
+.item.Ghost{
   border-left: 2px solid #735797;
 
 }
-.item.dragon{
+.item.Dragon{
   border-left: 2px solid #6F35FC;
 }
-.item.dark{
+.item.Dark{
   border-left: 2px solid #705746;
 }
-.item.steel{
+.item.Steel{
   border-left: 2px solid #B7B7CE;
 }
-.item.fairy{
+.item.Fairy{
   border-left: 2px solid #D685AD;
 }
 
@@ -124,7 +124,7 @@ body{
 .LeftGrass{
   background-image: url("./Images/LeftGrass.png");
 }
-.Water{
+.CenterWater{
   background-image: url("./Images/Water.png");
 }
 .WaterfallTop{

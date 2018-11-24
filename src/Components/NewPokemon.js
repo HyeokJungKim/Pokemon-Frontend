@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, Image} from 'semantic-ui-react'
+import {Image, Card, Header} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 
 class NewPokemon extends Component {
@@ -8,9 +8,13 @@ class NewPokemon extends Component {
     const {displayedPokemon} = this.props
     return (
       <Card centered>
-        <Image src={displayedPokemon.image}/>
         <Card.Content>
-        {displayedPokemon.name}
+          <Image floated='left' src={displayedPokemon.image} />
+          <Card.Header>
+            <Header textAlign="center">{displayedPokemon.name}</Header>
+            {displayedPokemon.type_1}
+            {displayedPokemon.type_2}
+          </Card.Header>
         </Card.Content>
       </Card>
     );

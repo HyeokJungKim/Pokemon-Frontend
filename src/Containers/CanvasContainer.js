@@ -16,7 +16,6 @@ class CanvasContainer extends Component {
               <NewPokemon/>
               <Canvas/>
             </Grid.Column>
-
             <Grid.Column width={6}>
               <ListContainer/>
             </Grid.Column>
