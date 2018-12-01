@@ -15,6 +15,8 @@ const pokemonReducer = (state = initState, action) => {
       return {...state, displayedPokemon: {}}
     case "CATCH_POKEMON":
       return {...state, displayedPokemon: {}}
+    case "RESET_STATE":
+      return {...state, displayedPokemon: {}}
     default:
       return state
   }

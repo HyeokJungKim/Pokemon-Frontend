@@ -27,6 +27,9 @@ const trainerReducer = (state = initState, action) => {
       return {...state, pokemons: action.payload}
     case "RESET_STATE":
       return initState
+    case "CATCH_POKEMON":
+      const pokemonArr = [...state.pokemons, action.payload]
+      return {...state, pokemons: pokemonArr}
     default:
       return state
   }

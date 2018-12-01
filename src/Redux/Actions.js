@@ -84,7 +84,16 @@ export const runAway = () => {
   }
 }
 
-export const catchPokemon = (pokemon) => {
+export const catchPokemon = (pokemon, token) => {
+  return (dispatch) => {
+    TrainerAdapter.catchPokemon(pokemon, token)
+    .then(resp => {
+      dispatch(persistCatchedPokemon(resp.data.attributes))
+    })
+  }
+}
+
+export const persistCatchedPokemon = (pokemon) => {
   return {
     type: "CATCH_POKEMON",
     payload: pokemon

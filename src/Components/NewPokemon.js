@@ -6,7 +6,7 @@ import {runAway, catchPokemon} from '../Redux/Actions'
 class NewPokemon extends Component {
 
   render() {
-    const {displayedPokemon, catchPokemon, runAway} = this.props
+    const {displayedPokemon, catchPokemon, runAway, token} = this.props
     const type2 = displayedPokemon.type_2 || ""
     return(
       <Fragment>
@@ -26,7 +26,7 @@ class NewPokemon extends Component {
               </Header>
             </Card.Header>
             <div className='ui two buttons'>
-              <Button basic color='green' onClick={() => catchPokemon(displayedPokemon)}>
+              <Button basic color='green' onClick={() => catchPokemon(displayedPokemon, token)}>
                 Catch
               </Button>
               <Button basic color='red' onClick={runAway}>
@@ -39,8 +39,11 @@ class NewPokemon extends Component {
   }
 }
 
-const mapStateToProps = ({pokemons}) => {
-  return {displayedPokemon: pokemons.displayedPokemon}
+const mapStateToProps = ({pokemons, auth}) => {
+  return {
+    displayedPokemon: pokemons.displayedPokemon,
+    token: auth.userToken
+  }
 }
 
 export default connect(mapStateToProps, {runAway, catchPokemon})(NewPokemon);

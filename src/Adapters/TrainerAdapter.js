@@ -25,7 +25,6 @@ class TrainerAdapter{
     .then(res => res.json())
   }
 
-
   static initialize(id, token){
     return fetch(`${API}/trainers/${id}`, {
       method: "GET",
@@ -38,6 +37,18 @@ class TrainerAdapter{
     .then(res => res.json())
   }
 
+  static catchPokemon(pokemon, token){
+    return fetch(API+`catch/${pokemon.id}`, {
+      method: "POST",
+      headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token
+      },
+      body: JSON.stringify({level: pokemon.level})
+    })
+    .then(res => res.json())
+  }
 }
 
 export default TrainerAdapter
