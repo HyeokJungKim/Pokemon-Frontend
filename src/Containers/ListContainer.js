@@ -13,7 +13,7 @@ class ListContainer extends Component {
       <Fragment>
         <Header as='h2' textAlign='center'>Pokémon Team</Header>
         <List verticalAlign='middle'>
-          {this.props.pokemons.map(pokemon => <PokemonPreview key={pokemon.id} pokemon={pokemon}/>)}
+          {this.props.pokemons.map((pokemon, index) => <PokemonPreview key={index} pokemon={pokemon}/>)}
         </List>
       </Fragment>
     );
