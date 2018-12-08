@@ -7,7 +7,6 @@ export const login = (id, token) => {
       if(json.error){
         dispatch(resetState())
       }else{
-        console.log(json);
         dispatch(initializeTrainer(json.data.attributes))
         dispatch(initializePokemons(json.included.map(pokeball => pokeball.attributes.pokemon_information)))
       }
@@ -21,6 +20,7 @@ export const persist = (token) => {
     .then(json => {
       if(json.error){
         dispatch(resetState())
+        dispatch(toggleLoading(false))
       }else{
         dispatch(initializeToken(token))
         dispatch(toggleLoading(false))
@@ -85,9 +85,9 @@ export const runAway = () => {
   }
 }
 
-export const catchPokemon = (pokemon, token) => {
+export const catchPokemon = (pokemon, token, experience) => {
   return (dispatch) => {
-    TrainerAdapter.catchPokemon(pokemon, token)
+    TrainerAdapter.catchPokemon(pokemon, token, experience)
     .then(resp => {
       dispatch(persistCatchedPokemon(resp.data.attributes.pokemon_information))
     })

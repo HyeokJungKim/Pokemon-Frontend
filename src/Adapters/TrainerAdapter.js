@@ -1,4 +1,4 @@
-const API = "http://localhost:3000/"
+const API = "http://localhost:3000"
 
 class TrainerAdapter{
   static login(data){
@@ -37,15 +37,18 @@ class TrainerAdapter{
     .then(res => res.json())
   }
 
-  static catchPokemon(pokemon, token){
-    return fetch(API+`catch/${pokemon.id}`, {
+  static catchPokemon(pokemon, token, experience){
+    return fetch(API+`/catch/${pokemon.id}`, {
       method: "POST",
       headers:{
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': token
       },
-      body: JSON.stringify({level: pokemon.level})
+      body: JSON.stringify({
+        level: pokemon.level,
+        experience: experience,
+      })
     })
     .then(res => res.json())
   }

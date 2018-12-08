@@ -6,6 +6,7 @@ import {runAway, catchPokemon} from '../Redux/Actions'
 class NewPokemon extends Component {
 
   render() {
+    // TODO: PASS EXPERIENCE INTO catchPokemon
     const {displayedPokemon, catchPokemon, runAway, token} = this.props
     const type2 = displayedPokemon.type_2 || ""
     return(
