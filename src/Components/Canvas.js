@@ -31,9 +31,11 @@ class Canvas extends Component {
         "DarkWaterL","CenterWater","CenterWater","CenterWater","DarkWaterR","DarkWater","DarkWaterBL2","DarkWaterT","DarkWaterT","DarkWaterT","DarkWaterT","VBridge","DarkWaterT","DarkWaterT","DarkWaterT","DarkWaterT",
         "DarkWaterL","CenterWater","CenterWater","CenterWater","DarkWaterR","BridgeEndL","Bridge","Bridge","Bridge","Bridge","Bridge","CenterBridge","Bridge","Bridge","BridgeEndR","DarkWater",
         "DarkWaterBR","CenterWater","CenterWater","CenterWater","DarkWaterR","BridgeWater2","BridgeWater","BridgeWater","BridgeWater","BridgeWater","BridgeWater","BotBridge","BridgeWater","BridgeWater","BridgeWater3","DarkWater"
-      ]
+      ],
+      experience: 0,
     };
   }
+
 
   componentDidMount() {
     document.addEventListener("keydown", this.moveTrainer, false)
@@ -41,6 +43,12 @@ class Canvas extends Component {
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.moveTrainer, false)
+  }
+
+  changeExperience = () => {
+    this.setState({
+      experience: Math.floor(Math.random() * 200 ) + 50
+    })
   }
 
   findRandom = (position) => {
@@ -97,6 +105,7 @@ class Canvas extends Component {
       <Segment basic>
         {!this.props.displayedPokemon.name ?
         <div id="canvas">
+
         {this.state.blueprint.map((name,index)=> {
           if(index === this.state.trainer){
             return <PixelTrainer key={index} name={name} />
@@ -106,7 +115,10 @@ class Canvas extends Component {
         })}
         </div>
           :
-        <NewPokemon/>
+        <NewPokemon
+          changeExperience={this.changeExperience}
+          experience={this.state.experience}
+        />
         }
       </Segment>
     )
@@ -116,7 +128,7 @@ class Canvas extends Component {
 
 const mapStateToProps = ({pokemons}) => {
   return {
-    displayedPokemon: pokemons.displayedPokemon
+    displayedPokemon: pokemons.displayedPokemon,
   }
 }
 

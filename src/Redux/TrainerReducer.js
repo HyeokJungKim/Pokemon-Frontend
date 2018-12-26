@@ -23,6 +23,15 @@ const trainerReducer = (state = initState, action) => {
   switch (action.type) {
     case "INITIALIZE_TRAINER":
       return {...state, trainer: action.payload}
+    case "ADD_EXPERIENCE":
+      const addedEXP = state.pokemons.map((pokemon) => {
+        return (pokemon.experience + action.payload) > (pokemon.level * 25)
+          ?
+          {...pokemon, level: pokemon.level + 1, experience: 0}
+        :
+          {...pokemon, experience: pokemon.experience + action.payload}
+      })
+      return {...state, pokemons: addedEXP}
     case "INITIALIZE_POKEMONS":
       return {...state, pokemons: action.payload}
     case "RESET_STATE":

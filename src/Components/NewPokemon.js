@@ -5,37 +5,60 @@ import {runAway, catchPokemon} from '../Redux/Actions'
 
 class NewPokemon extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      displayExperience: false
+    };
+  }
+
+  componentDidMount() {
+    this.props.changeExperience()
+  }
+
+  toggleDisplay = () => {
+    this.setState({displayExperience: true})
+  }
+
   render() {
     // TODO: PASS EXPERIENCE INTO catchPokemon
-    const {displayedPokemon, catchPokemon, runAway, token} = this.props
+    const {displayedPokemon, catchPokemon, runAway, token, experience} = this.props
     const type2 = displayedPokemon.type_2 || ""
     return(
       <Fragment>
-          <Card centered>
-          <Card.Content>
-            <Image floated='left' src={displayedPokemon.image} />
-            <Card.Header>
-              <Header textAlign="center">{displayedPokemon.name}</Header>
-              <Header as='h4' textAlign="center">Level: {displayedPokemon.level}</Header>
-              <Header as='h5' textAlign='center'>
-                <span className={`type ${displayedPokemon.type_1}`}>{displayedPokemon.type_1}</span>
-                {!!displayedPokemon.type_2 ?
-                  <span className={`type ${type2}`}>{` ${type2}`}</span>
-                    :
-                  null
-                }
-              </Header>
-            </Card.Header>
-            <div className='ui two buttons'>
-              <Button basic color='green' onClick={() => catchPokemon(displayedPokemon, token)}>
-                Catch
-              </Button>
-              <Button basic color='red' onClick={runAway}>
-                Run Away
-              </Button>
-            </div>
-          </Card.Content>
-        </Card>
+        {this.state.displayExperience ?
+          `Each your Pokémon have recieved ${experience} experience points!`
+            :
+            <Card centered>
+            <Card.Content>
+              <Image floated='left' src={displayedPokemon.image} />
+              <Card.Header>
+                <Header textAlign="center">{displayedPokemon.name}</Header>
+                <Header as='h4' textAlign="center">Level: {displayedPokemon.level}</Header>
+                <Header as='h5' textAlign='center'>
+                  <span className={`type ${displayedPokemon.type_1}`}>{displayedPokemon.type_1}</span>
+                  {!!displayedPokemon.type_2 ?
+                    <span className={`type ${type2}`}>{` ${type2}`}</span>
+                      :
+                    null
+                  }
+                </Header>
+              </Card.Header>
+              <div className='ui two buttons'>
+                <Button basic color='green' onClick={() => {
+                    this.toggleDisplay()
+                    setTimeout(() => catchPokemon(displayedPokemon, token, experience), 3000)
+                  }
+                }>
+                  Catch
+                </Button>
+                <Button basic color='red' onClick={runAway}>
+                  Run Away
+                </Button>
+              </div>
+            </Card.Content>
+          </Card>
+        }
     </Fragment>)
   }
 }
@@ -43,7 +66,7 @@ class NewPokemon extends Component {
 const mapStateToProps = ({pokemons, auth}) => {
   return {
     displayedPokemon: pokemons.displayedPokemon,
-    token: auth.userToken
+    token: auth.userToken,
   }
 }
 

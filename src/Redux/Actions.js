@@ -89,6 +89,7 @@ export const catchPokemon = (pokemon, token, experience) => {
   return (dispatch) => {
     TrainerAdapter.catchPokemon(pokemon, token, experience)
     .then(resp => {
+      dispatch(addExperience(experience))
       dispatch(persistCatchedPokemon(resp.data.attributes.pokemon_information))
     })
   }
@@ -98,5 +99,12 @@ export const persistCatchedPokemon = (pokemon) => {
   return {
     type: "CATCH_POKEMON",
     payload: pokemon
+  }
+}
+
+export const addExperience = (experience) => {
+  return {
+    type: "ADD_EXPERIENCE",
+    payload: experience
   }
 }
