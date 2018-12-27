@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import {Image, Card, Header, Button} from 'semantic-ui-react'
 import {connect} from 'react-redux'
+import ExperienceNotification from './ExperienceNotification'
 import {runAway, catchPokemon} from '../Redux/Actions'
 
 class NewPokemon extends Component {
@@ -21,13 +22,12 @@ class NewPokemon extends Component {
   }
 
   render() {
-    // TODO: PASS EXPERIENCE INTO catchPokemon
     const {displayedPokemon, catchPokemon, runAway, token, experience} = this.props
     const type2 = displayedPokemon.type_2 || ""
     return(
       <Fragment>
         {this.state.displayExperience ?
-          `Each your Pokémon have recieved ${experience} experience points!`
+          <ExperienceNotification displayedPokemon={displayedPokemon} experience={experience}/>
             :
             <Card centered>
             <Card.Content>
@@ -47,7 +47,7 @@ class NewPokemon extends Component {
               <div className='ui two buttons'>
                 <Button basic color='green' onClick={() => {
                     this.toggleDisplay()
-                    setTimeout(() => catchPokemon(displayedPokemon, token, experience), 3000)
+                    catchPokemon(displayedPokemon, token, experience)
                   }
                 }>
                   Catch
@@ -63,7 +63,7 @@ class NewPokemon extends Component {
   }
 }
 
-const mapStateToProps = ({pokemons, auth}) => {
+const mapStateToProps = ({pokemons, auth, trainer}) => {
   return {
     displayedPokemon: pokemons.displayedPokemon,
     token: auth.userToken,

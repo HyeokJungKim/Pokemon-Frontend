@@ -90,7 +90,7 @@ export const catchPokemon = (pokemon, token, experience) => {
     TrainerAdapter.catchPokemon(pokemon, token, experience)
     .then(resp => {
       dispatch(addExperience(experience))
-      dispatch(persistCatchedPokemon(resp.data.attributes.pokemon_information))
+      setTimeout(() => dispatch(persistCatchedPokemon(resp.data.attributes.pokemon_information)), 1500)
     })
   }
 }

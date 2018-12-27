@@ -22,7 +22,7 @@ class ListContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {pokemons: state.trainer.pokemons}
+  return {pokemons: state.trainer.pokemons.slice(0,6)}
 }
 
 export default connect(mapStateToProps)(ListContainer);

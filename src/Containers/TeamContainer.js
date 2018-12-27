@@ -1,24 +1,33 @@
 import React, { Component } from 'react';
-import {Segment, Grid} from 'semantic-ui-react'
+import {Segment, Card} from 'semantic-ui-react'
+import {connect} from 'react-redux'
+import PokemonCard from '../Components/PokemonCard'
 
 class TeamContainer extends Component {
+
+  renderPokemon = () => {
+    return this.props.pokemons.map((pokemon) => {
+      return (
+        <PokemonCard pokemon={pokemon}/>
+      )
+    })
+  }
 
   render() {
     return (
       <Segment basic>
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={10}>
-
-            </Grid.Column>
-            <Grid.Column width={6}>
-
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        <Card.Group itemsPerRow={3}>
+          {this.renderPokemon()}
+        </Card.Group>
       </Segment>
     );
   }
 }
 
-export default TeamContainer;
+const mapStateToProps = ({trainer}) => {
+  return {
+    pokemons: trainer.pokemons.slice(0,6)
+  }
+}
+
+export default connect(mapStateToProps)(TeamContainer);

@@ -36,7 +36,6 @@ class Canvas extends Component {
     };
   }
 
-
   componentDidMount() {
     document.addEventListener("keydown", this.moveTrainer, false)
   }
