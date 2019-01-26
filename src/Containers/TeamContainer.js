@@ -1,32 +1,51 @@
 import React, { Component } from 'react';
-import {Segment, Card} from 'semantic-ui-react'
+import {Card} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import PokemonCard from '../Components/PokemonCard'
+
+import { DragDropContext, Droppable} from 'react-beautiful-dnd';
 
 class TeamContainer extends Component {
 
   renderPokemon = () => {
-    return this.props.pokemons.map((pokemon) => {
+    return this.props.pokemons.map((pokemon, index) => {
       return (
-        <PokemonCard pokemon={pokemon}/>
+        <PokemonCard
+          key={index}
+          index={index}
+          pokemon={pokemon}/>
       )
     })
   }
 
+  onDragEnd = (result) => {
+    console.log(result);
+  }
+
   render() {
     return (
-      <Segment basic>
-        <Card.Group itemsPerRow={3}>
-          {this.renderPokemon()}
-        </Card.Group>
-      </Segment>
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided) => {
+              return(
+                <div className="ui basic segment" ref={provided.innerRef} {...provided.droppableProps}>
+                  <Card.Group itemsPerRow={3}>
+                    {this.renderPokemon()}
+                    {provided.placeholder}
+                  </Card.Group>
+              </div>
+              )
+            }
+          }
+        </Droppable>
+      </DragDropContext>
     );
   }
 }
 
 const mapStateToProps = ({trainer}) => {
   return {
-    pokemons: trainer.pokemons.slice(0,6)
+    pokemons: trainer.pokemons
   }
 }
 
