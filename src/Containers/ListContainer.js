@@ -21,8 +21,8 @@ class ListContainer extends Component {
 
 }
 
-const mapStateToProps = (state) => {
-  return {pokemons: state.trainer.pokemons.slice(0,6)}
+const mapStateToProps = ({trainer}) => {
+  return {pokemons: trainer.pokemonTeam}
 }
 
 export default connect(mapStateToProps)(ListContainer);

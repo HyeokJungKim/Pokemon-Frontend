@@ -1,43 +1,74 @@
 import React, { Component } from 'react';
-import {Card} from 'semantic-ui-react'
-import {connect} from 'react-redux'
-import PokemonCard from '../Components/PokemonCard'
+import {Segment, Grid} from 'semantic-ui-react'
 
-import { DragDropContext, Droppable} from 'react-beautiful-dnd';
+import {connect} from 'react-redux'
+import PokemonTeamContainer from './PokemonTeamContainer'
+import PokemonBoxContainer from './PokemonBoxContainer'
+
+import { DragDropContext} from 'react-beautiful-dnd';
 
 class TeamContainer extends Component {
 
-  renderPokemon = () => {
-    return this.props.pokemons.map((pokemon, index) => {
-      return (
-        <PokemonCard
-          key={index}
-          index={index}
-          pokemon={pokemon}/>
-      )
-    })
-  }
-
   onDragEnd = (result) => {
     console.log(result);
+    const {destination, source, draggableId} = result
+    const {pokemonBox, pokemonTeam} = this.props
+
+    // POKEMON BEING HELD ID = draggableId
+
+    // if (!destination) {
+    //   return;
+    // } else if (destination.droppableId === source.droppableId && destination.index === source.index) {
+    //   return;
+    // } else {
+    //   if (destination.droppableId === source.droppableId){
+    //
+    //     if(destination.droppableId === "pokemon-Box"){
+    //       let destination_id = pokemonBox[destination.index]
+    //       let source_id = pokemonBox[source.index]
+    //       // console.log(source_id, destination_id)
+    //     }
+    //     else{
+    //       let destination_id = pokemonTeam[destination.index]
+    //       let source_id = pokemonTeam[source.index]
+    //       // console.log(source_id, destination_id)
+    //
+    //     }
+    //
+    //   } else {
+    //     if(destination.droppableId === "pokemon-Box"){
+    //       let destination_id = pokemonBox[destination.index]
+    //       let source_id = pokemonTeam[source.index]
+    //       // console.log(source_id, destination_id)
+    //
+    //     } else {
+    //       let source_id = pokemonBox[destination.index]
+    //       let destination_id = pokemonTeam[source.index]
+    //       // console.log(source_id, destination_id)
+    //
+    //     }
+    //
+    //   }
+    //
+    // }
+
   }
 
   render() {
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided) => {
-              return(
-                <div className="ui basic segment" ref={provided.innerRef} {...provided.droppableProps}>
-                  <Card.Group itemsPerRow={3}>
-                    {this.renderPokemon()}
-                    {provided.placeholder}
-                  </Card.Group>
-              </div>
-              )
-            }
-          }
-        </Droppable>
+        <Segment basic>
+          <Grid divided>
+            <Grid.Row>
+              <Grid.Column width={6}>
+                <PokemonTeamContainer pokemons={this.props.pokemonTeam}/>
+              </Grid.Column>
+              <Grid.Column width={10}>
+                <PokemonBoxContainer pokemons={this.props.pokemonBox}/>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Segment>
       </DragDropContext>
     );
   }
@@ -45,7 +76,8 @@ class TeamContainer extends Component {
 
 const mapStateToProps = ({trainer}) => {
   return {
-    pokemons: trainer.pokemons
+    pokemonTeam: trainer.pokemonTeam,
+    pokemonBox: trainer.pokemonBox
   }
 }
 

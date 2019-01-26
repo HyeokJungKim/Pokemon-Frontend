@@ -15,7 +15,8 @@
 // RootReducer.getState() = hobbitState: {//STATE OF HOBBIT}
 
 const initState = {
-  pokemons: [],
+  pokemonTeam: [],
+  pokemonBox : [],
   trainer: {},
 }
 
@@ -24,21 +25,26 @@ const trainerReducer = (state = initState, action) => {
     case "INITIALIZE_TRAINER":
       return {...state, trainer: action.payload}
     case "ADD_EXPERIENCE":
-      const addedEXP = state.pokemons.map((pokemon) => {
+      const addedEXP = state.pokemonTeam.map((pokemon) => {
         return (pokemon.experience + action.payload) > (pokemon.level * 25)
           ?
           {...pokemon, level: pokemon.level + 1, experience: 0}
         :
           {...pokemon, experience: pokemon.experience + action.payload}
       })
-      return {...state, pokemons: addedEXP}
+      return {...state, pokemonTeam: addedEXP}
     case "INITIALIZE_POKEMONS":
-      return {...state, pokemons: action.payload}
+      return {...state, pokemonTeam: action.payload.slice(0,6), pokemonBox: action.payload.slice(6)}
     case "RESET_STATE":
       return initState
     case "CATCH_POKEMON":
-      const pokemonArr = [...state.pokemons, action.payload]
-      return {...state, pokemons: pokemonArr}
+      if (state.pokemonTeam.length >= 6) {
+        const pokemonArr = [...state.pokemonBox, action.payload]
+        return {...state, pokemonBox: pokemonArr}
+      } else {
+        const pokemonArr = [...state.pokemonTeam, action.payload]
+        return {...state, pokemonTeam: pokemonArr}
+      }
     default:
       return state
   }

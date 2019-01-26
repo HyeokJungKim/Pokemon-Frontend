@@ -63,7 +63,7 @@ class NewPokemon extends Component {
   }
 }
 
-const mapStateToProps = ({pokemons, auth, trainer}) => {
+const mapStateToProps = ({pokemons, auth}) => {
   return {
     displayedPokemon: pokemons.displayedPokemon,
     token: auth.userToken,

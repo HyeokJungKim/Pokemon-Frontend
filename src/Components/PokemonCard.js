@@ -6,12 +6,11 @@ class PokemonCard extends PureComponent {
   render() {
     const {pokemon, index} = this.props
     const type2 = pokemon.type_2 || ""
-    console.log(index);
     return (
-      <Draggable draggableId={index+1} index={index}>
+      <Draggable draggableId={pokemon.team_number} index={index}>
         {(provided) => {
           return(
-            <div className="ui centered card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+            <div className="ui fluid centered card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             <Card.Content>
               <Image floated='left' src={pokemon.image} />
               <Card.Header>
