@@ -8,7 +8,9 @@ export const login = (id, token) => {
         dispatch(resetState())
       }else{
         dispatch(initializeTrainer(json.data.attributes))
-        dispatch(initializePokemons(json.included.map(pokeball => pokeball.attributes.pokemon_information)))
+        const pokemons = json.included.map(pokeball => pokeball.attributes.pokemon_information)
+        dispatch(initializePokemonTeam(pokemons.filter(pokemon => pokemon.onTeam)))
+        dispatch(initializePokemonBox(pokemons.filter(pokemon => !pokemon.onTeam)))
       }
     })
   }
@@ -25,7 +27,9 @@ export const persist = (token) => {
         dispatch(initializeToken(token))
         dispatch(toggleLoading(false))
         dispatch(initializeTrainer(json.data.attributes))
-        dispatch(initializePokemons(json.included.map(pokeball => pokeball.attributes.pokemon_information)))
+        const pokemons = json.included.map(pokeball => pokeball.attributes.pokemon_information)
+        dispatch(initializePokemonTeam(pokemons.filter(pokemon => pokemon.onTeam)))
+        dispatch(initializePokemonBox(pokemons.filter(pokemon => !pokemon.onTeam)))
       }
     })
   }
@@ -38,9 +42,16 @@ export const initializeTrainer = (trainer) => {
   }
 }
 
-export const initializePokemons = (pokemons) => {
+export const initializePokemonTeam = (pokemons) => {
   return {
-    type: "INITIALIZE_POKEMONS",
+    type: "INITIALIZE_POKEMON_TEAM",
+    payload: pokemons
+  }
+}
+
+export const initializePokemonBox = (pokemons) => {
+  return {
+    type: "INITIALIZE_POKEMON_BOX",
     payload: pokemons
   }
 }
@@ -85,9 +96,9 @@ export const runAway = () => {
   }
 }
 
-export const catchPokemon = (pokemon, token, experience) => {
+export const catchPokemon = (pokemon, token, experience, canFitOnTeam) => {
   return (dispatch) => {
-    TrainerAdapter.catchPokemon(pokemon, token, experience)
+    TrainerAdapter.catchPokemon(pokemon, token, experience, canFitOnTeam)
     .then(resp => {
       dispatch(addExperience(experience))
       setTimeout(() => dispatch(persistCatchedPokemon(resp.data.attributes.pokemon_information)), 1500)

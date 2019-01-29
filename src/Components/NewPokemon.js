@@ -22,7 +22,7 @@ class NewPokemon extends Component {
   }
 
   render() {
-    const {displayedPokemon, catchPokemon, runAway, token, experience} = this.props
+    const {displayedPokemon, catchPokemon, runAway, token, experience, canFitOnTeam} = this.props
     const type2 = displayedPokemon.type_2 || ""
     return(
       <Fragment>
@@ -47,7 +47,7 @@ class NewPokemon extends Component {
               <div className='ui two buttons'>
                 <Button basic color='green' onClick={() => {
                     this.toggleDisplay()
-                    catchPokemon(displayedPokemon, token, experience)
+                    catchPokemon(displayedPokemon, token, experience, canFitOnTeam)
                   }
                 }>
                   Catch
@@ -63,10 +63,11 @@ class NewPokemon extends Component {
   }
 }
 
-const mapStateToProps = ({pokemons, auth}) => {
+const mapStateToProps = ({pokemons, auth, trainer}) => {
   return {
     displayedPokemon: pokemons.displayedPokemon,
     token: auth.userToken,
+    canFitOnTeam: trainer.pokemonTeam.length < 6
   }
 }
 

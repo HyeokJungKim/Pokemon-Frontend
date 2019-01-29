@@ -33,17 +33,17 @@ const trainerReducer = (state = initState, action) => {
           {...pokemon, experience: pokemon.experience + action.payload}
       })
       return {...state, pokemonTeam: addedEXP}
-    case "INITIALIZE_POKEMONS":
-      return {...state, pokemonTeam: action.payload.slice(0,6), pokemonBox: action.payload.slice(6)}
+    case "INITIALIZE_POKEMON_TEAM":
+      return {...state, pokemonTeam: action.payload}
+    case "INITIALIZE_POKEMON_BOX":
+      return {...state, pokemonBox: action.payload}
     case "RESET_STATE":
       return initState
     case "CATCH_POKEMON":
       if (state.pokemonTeam.length >= 6) {
-        const pokemonArr = [...state.pokemonBox, action.payload]
-        return {...state, pokemonBox: pokemonArr}
+        return {...state, pokemonBox: [...state.pokemonBox, action.payload]}
       } else {
-        const pokemonArr = [...state.pokemonTeam, action.payload]
-        return {...state, pokemonTeam: pokemonArr}
+        return {...state, pokemonTeam: [...state.pokemonTeam, action.payload]}
       }
     default:
       return state

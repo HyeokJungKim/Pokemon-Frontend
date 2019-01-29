@@ -13,7 +13,7 @@ class TeamContainer extends Component {
     console.log(result);
     const {destination, source, draggableId} = result
     const {pokemonBox, pokemonTeam} = this.props
-
+    console.log(pokemonBox, pokemonTeam);
     // POKEMON BEING HELD ID = draggableId
 
     // if (!destination) {
