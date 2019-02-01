@@ -19,7 +19,7 @@ class PokemonTeamContainer extends PureComponent {
 
   render() {
     return (
-      <Droppable droppableId="pokemon-Team">
+      <Droppable droppableId="pokemonTeam">
         {(provided) => {
           return(
             <div className="ui basic segment" ref={provided.innerRef} {...provided.droppableProps}>

@@ -19,7 +19,7 @@ class PokemonBoxContainer extends PureComponent {
 
   render() {
     return (
-      <Droppable droppableId="pokemon-Box">
+      <Droppable droppableId="pokemonBox">
         {(provided) => {
           return(
             <div className="ui basic segment" ref={provided.innerRef} {...provided.droppableProps}>

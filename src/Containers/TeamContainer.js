@@ -10,17 +10,32 @@ import { DragDropContext} from 'react-beautiful-dnd';
 class TeamContainer extends Component {
 
   onDragEnd = (result) => {
-    console.log(result);
+
     const {destination, source, draggableId} = result
     const {pokemonBox, pokemonTeam} = this.props
-    console.log(pokemonBox, pokemonTeam);
+
+    if (!destination) {
+      return;
+    } else if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return;
+    } else if(destination.droppableId === "pokemonTeam"){
+      if(pokemonTeam.length >= 6){
+        console.log("Invalid Move Because Too Many Pokemons");
+      } else{
+        console.log(result, "valid move");
+      }
+    } else if(destination.droppableId === "pokemonBox"){
+      if (pokemonTeam.length === 1) {
+        console.log("Invalid Move Because You Need One Pokemon");
+      } else {
+        console.log("valid move", result);
+      }
+    }
     // POKEMON BEING HELD ID = draggableId
 
     // if (!destination) {
     //   return;
-    // } else if (destination.droppableId === source.droppableId && destination.index === source.index) {
-    //   return;
-    // } else {
+    // }  else {
     //   if (destination.droppableId === source.droppableId){
     //
     //     if(destination.droppableId === "pokemon-Box"){
