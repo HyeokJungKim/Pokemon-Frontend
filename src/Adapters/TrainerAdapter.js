@@ -17,7 +17,6 @@ class TrainerAdapter{
     return fetch(`${API}/trainers/persist`, {
       method: "GET",
       headers:{
-        'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': token
       }
@@ -29,7 +28,6 @@ class TrainerAdapter{
     return fetch(`${API}/trainers/${id}`, {
       method: "GET",
       headers:{
-        'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': token
       }
