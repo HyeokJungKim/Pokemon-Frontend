@@ -1,7 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import {Card, Header, Image} from 'semantic-ui-react'
 import {Draggable} from 'react-beautiful-dnd'
-class PokemonCard extends PureComponent {
+
+class PokemonCard extends Component {
 
   render() {
     const {pokemon, index} = this.props

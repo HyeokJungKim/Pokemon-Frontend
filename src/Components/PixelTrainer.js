@@ -1,15 +1,11 @@
-import React,{Component} from 'react'
+import React from 'react'
 
-class PixelTrainer extends Component{
-
-  render(){
-    const {name} = this.props
-    return(
-      <div className={`pixel ${name}`}>
-        <div className={`pixel trainer`}></div>
-      </div>
-    )
-  }
+const PixelTrainer = ({name}) => {
+  return(
+    <div className={`pixel ${name}`}>
+      <div className={`pixel trainer`}></div>
+    </div>
+  )
 }
 
 export default PixelTrainer

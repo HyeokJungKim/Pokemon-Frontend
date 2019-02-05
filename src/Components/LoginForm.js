@@ -11,6 +11,7 @@ const initialState = {
   password:"",
   error: ""
 }
+
 class LoginForm extends Component {
 
   constructor(props) {
