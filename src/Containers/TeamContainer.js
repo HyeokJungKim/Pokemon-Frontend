@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {Segment, Grid} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'
-import PokemonTeamContainer from './PokemonTeamContainer'
-import PokemonBoxContainer from './PokemonBoxContainer'
+import PokemonContainer from './PokemonContainer'
 
 import { DragDropContext} from 'react-beautiful-dnd';
 
@@ -76,10 +75,10 @@ class TeamContainer extends Component {
           <Grid divided>
             <Grid.Row>
               <Grid.Column width={6}>
-                <PokemonTeamContainer pokemons={this.props.pokemonTeam}/>
+                <PokemonContainer pokemons={this.props.pokemonTeam} droppableId={"pokemonTeam"}/>
               </Grid.Column>
               <Grid.Column width={10}>
-                <PokemonBoxContainer pokemons={this.props.pokemonBox}/>
+                <PokemonContainer pokemons={this.props.pokemonBox} droppableId={"pokemonBox"}/>
               </Grid.Column>
             </Grid.Row>
           </Grid>

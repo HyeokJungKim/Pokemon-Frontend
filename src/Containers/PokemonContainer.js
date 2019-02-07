@@ -3,7 +3,7 @@ import PokemonCard from '../Components/PokemonCard'
 import {Card} from 'semantic-ui-react'
 import {Droppable} from 'react-beautiful-dnd';
 
-class PokemonTeamContainer extends PureComponent {
+class PokemonContainer extends PureComponent {
 
   renderPokemon = () => {
     return this.props.pokemons.map((pokemon, index) => {
@@ -19,7 +19,7 @@ class PokemonTeamContainer extends PureComponent {
 
   render() {
     return (
-      <Droppable droppableId="pokemonTeam">
+      <Droppable droppableId={this.props.droppableId}>
         {(provided) => {
           return(
             <div className="ui basic segment" ref={provided.innerRef} {...provided.droppableProps}>
@@ -36,4 +36,4 @@ class PokemonTeamContainer extends PureComponent {
 
 }
 
-export default PokemonTeamContainer;
+export default PokemonContainer;
