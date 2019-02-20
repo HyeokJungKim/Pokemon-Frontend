@@ -1,4 +1,19 @@
 import TrainerAdapter from "../Adapters/TrainerAdapter"
+import PokemonAdapter from "../Adapters/PokemonAdapter"
+
+export const initializePokemons = () => {
+  return (dispatch) => {
+    PokemonAdapter.getAllPokemons()
+    .then(resp=> {
+      dispatch(getAllPokemons(resp.data.map(pokemon => pokemon.attributes)))
+      if(localStorage.getItem('token')){
+        dispatch(persist(localStorage.getItem('token')))
+      } else {
+        dispatch(toggleLoading(false))
+      }
+    })
+  }
+}
 
 export const login = (id, token) => {
   return (dispatch) => {
