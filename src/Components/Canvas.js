@@ -60,7 +60,7 @@ class Canvas extends Component {
   }
 
   moveTrainer = (e) => {
-    if(!this.props.displayedPokemon.name){
+    if(this.props.noPokemonOnDisplay){
       const position = this.state.trainer
       const modulo = position % 16
       switch (e.code) {
@@ -102,7 +102,7 @@ class Canvas extends Component {
   render() {
     return (
       <Segment basic>
-        {!this.props.displayedPokemon.name ?
+        {this.props.noPokemonOnDisplay ?
         <div id="canvas">
 
         {this.state.blueprint.map((name,index)=> {
@@ -127,7 +127,7 @@ class Canvas extends Component {
 
 const mapStateToProps = ({pokemons}) => {
   return {
-    displayedPokemon: pokemons.displayedPokemon,
+    noPokemonOnDisplay: !pokemons.displayedPokemon.name,
   }
 }
 

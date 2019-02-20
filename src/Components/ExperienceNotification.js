@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {Header} from 'semantic-ui-react'
 
-const ExperienceNotification = ({displayedPokemon, experience, pokemons}) => {
+const ExperienceNotification = ({displayedPokemon, experience, greaterThanSix}) => {
   return (
     <Header as="h2" textAlign="center">
-      {pokemons.length >= 6 ?
+      {greaterThanSix ?
         <div>
           Each pokemon in your team has gained {experience} points!
           <br/>
@@ -22,7 +22,7 @@ const ExperienceNotification = ({displayedPokemon, experience, pokemons}) => {
 
 const mapStateToProps = ({trainer}) => {
   return {
-    pokemons: trainer.pokemonTeam,
+    greaterThanSix: trainer.pokemonTeam.length >= 6,
   }
 }
 export default connect(mapStateToProps)(ExperienceNotification);
