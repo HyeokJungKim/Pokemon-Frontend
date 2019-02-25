@@ -5,8 +5,10 @@ import {connect} from 'react-redux'
 import {initializePokemons} from './Redux/Actions'
 
 import HomeContainer from './Containers/HomeContainer'
-import FormContainer from './Containers/FormContainer'
 import GameContainer from './Containers/GameContainer'
+import About from './Components/About'
+import LoginForm from './Components/LoginForm'
+import RegisterForm from './Components/RegisterForm'
 
 import {Switch, Route, withRouter} from 'react-router-dom'
 class App extends Component {
@@ -15,13 +17,28 @@ class App extends Component {
     this.props.initializePokemons()
   }
 
+  whatToDisplay = (props) => {
+    switch (props.location.pathname) {
+      case "/login":
+        return <LoginForm {...props}/>
+      case "/register":
+        return <RegisterForm {...props}/>
+      case "/":
+        return <About/>
+      default:
+        return <p>404</p>
+    }
+  }
+
   render() {
     return (
       <Switch>
-        <Route path='/login' render={(props) => <FormContainer {...props}/>}/>
-        <Route path='/register' render={(props) => <FormContainer {...props}/>}/>
+        <Route path='/login' render={(props) => <HomeContainer {...props} whatToDisplay={this.whatToDisplay}/>}/>
+        <Route path='/register' render={(props) => <HomeContainer {...props} whatToDisplay={this.whatToDisplay} />}/>
         <Route path='/home' render={(props) => <GameContainer {...props}/>}/>
-        <Route path='/' exact render={(props) => <HomeContainer {...props}/>}/>
+        <Route path='/' exact render={(props) => <HomeContainer {...props} whatToDisplay={this.whatToDisplay}/>}/>
+        <Route path='/' render={(props) => <HomeContainer {...props} whatToDisplay={this.whatToDisplay}/>}/>
+
       </Switch>
     );
   }
