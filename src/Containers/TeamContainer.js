@@ -44,7 +44,7 @@ class TeamContainer extends Component {
           if (destination.index === pokemonBox.length) {
             position = pokemonBox[pokemonBox.length - 1].position
           } else {
-            position = pokemonBox[destination.index].position
+            position = pokemonBox[destination.index].position - 1
           }
         this.props.movePokemon(draggableId, position, userToken)
       }
