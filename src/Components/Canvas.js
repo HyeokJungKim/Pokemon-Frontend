@@ -50,12 +50,9 @@ class Canvas extends Component {
     })
   }
 
-  findRandom = (position) => {
+  findRandom = () => {
     if(Math.random() < 0.25){
       this.props.getRandom()
-      this.setState((prevState) =>
-        {return {trainer: prevState.trainer + position}}
-      )
     }
   }
 
@@ -67,28 +64,28 @@ class Canvas extends Component {
         case "KeyW":
           if(position > 15 ){
             this.setState((prevState) =>
-              {return {trainer: prevState.trainer - 16}}, this.findRandom(16)
+              {return {trainer: prevState.trainer - 16}}, this.findRandom()
             )
           }
           break;
         case "KeyS":
           if(position < 240){
             this.setState((prevState) =>
-              {return {trainer: prevState.trainer + 16}}, this.findRandom(-16)
+              {return {trainer: prevState.trainer + 16}}, this.findRandom()
             )
           }
           break;
         case "KeyA":
           if(modulo !== 0){
             this.setState((prevState) =>
-              {return {trainer: prevState.trainer - 1}}, this.findRandom(1)
+              {return {trainer: prevState.trainer - 1}}, this.findRandom()
             )
           }
           break;
         case "KeyD":
           if(modulo !== 15){
             this.setState((prevState) =>
-              {return {trainer: prevState.trainer + 1}}, this.findRandom(-1)
+              {return {trainer: prevState.trainer + 1}}, this.findRandom()
             )
           }
           break;

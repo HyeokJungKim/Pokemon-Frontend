@@ -1,19 +1,3 @@
-//IF YOU WANT TO MAKE FETCH WITHIN ACTIONS, USE THUNK
-// yarn add redux-thunk OR npm add redux-thunk
-// After thunk is installed
-// import applyMiddleware from redux (where you created store) and import thunk from 'redux-thunk'
-// applyMiddleware(thunk) as second argument
-// In the action, return a function with dispatch* as the first parameter
-// Then within the function body, make the fetch request and dispatch* the object, which will hit the reducer
-
-
-
-// import combineReducer from redux
-// combineReducer takes an object as a parameter
-// combine `const RootReducer = ({ hobbitState: hobbitReducer, hogState: hogReducer })`
-// createStore(RootReducer)
-// RootReducer.getState() = hobbitState: {//STATE OF HOBBIT}
-
 const initState = {
   pokemonTeam: [],
   pokemonBox : [],
@@ -44,18 +28,6 @@ const trainerReducer = (state = initState, action) => {
         return {...state, pokemonBox: [...state.pokemonBox, action.payload]}
       } else {
         return {...state, pokemonTeam: [...state.pokemonTeam, action.payload]}
-      }
-    case "MOVE_TO_BOX":
-      return {
-        ...state,
-        pokemonTeam: state.pokemonTeam.filter(pokemon => pokemon.id !== action.payload.id),
-        pokemonBox: [...state.pokemonBox, action.payload].sort((a,b) => a.position - b.position)
-      }
-    case "MOVE_TO_TEAM":
-      return {
-        ...state,
-        pokemonBox: state.pokemonBox.filter(pokemon => pokemon.id !== action.payload.id),
-        pokemonTeam: [...state.pokemonTeam, action.payload].sort((a,b) => a.position - b.position)
       }
     default:
       return state

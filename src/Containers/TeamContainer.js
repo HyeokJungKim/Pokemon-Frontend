@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Segment, Grid} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'
-import {updateOrder} from '../Redux/Actions'
+import {movePokemon} from '../Redux/Actions'
 import PokemonContainer from './PokemonContainer'
 
 import { DragDropContext} from 'react-beautiful-dnd';
@@ -14,69 +14,49 @@ class TeamContainer extends Component {
     const {destination, source, draggableId} = result
     const {pokemonBox, pokemonTeam, userToken} = this.props
     let position = 0
-    if (!destination) {
-      return;
-    } else if (destination.droppableId === source.droppableId && destination.index === source.index) {
-      return;
-    } else if(destination.droppableId === "pokemonTeam"){
-      if(pokemonTeam.length >= 6){
+    if (!destination){return}
+    else if (destination.droppableId === source.droppableId && destination.index === source.index) {return}
+
+    else if(destination.droppableId === "pokemonTeam"){
+      if(pokemonTeam.length >= 6 && source.droppableId === "pokemonBox"){
         console.log("Invalid Move Because Too Many Pokemons");
-      } else{
+      } else if (source.droppableId === "pokemonTeam") {
+          if (destination.index === pokemonTeam.length) {
+            position = pokemonTeam[pokemonTeam.length - 1].position
+          } else {
+            position = pokemonTeam[destination.index].position
+          }
+        this.props.movePokemon(draggableId, position, userToken)
+
+      } else {
         if (destination.index === pokemonTeam.length) {
-          position = pokemonTeam[pokemonTeam.length - 1].position
+          position = pokemonTeam[pokemonTeam.length - 1].position + 1
         } else {
-          position = pokemonTeam[destination.index].position -1
+          position = pokemonTeam[destination.index].position
         }
-        this.props.updateOrder(draggableId, position, userToken)
+        this.props.movePokemon(draggableId, position, userToken, true)
       }
+
     } else if(destination.droppableId === "pokemonBox"){
       if (pokemonTeam.length === 1) {
         console.log("Invalid Move Because You Need One Pokemon");
-      } else {
+      } else if(source.droppableId === "pokemonBox"){
+          if (destination.index === pokemonBox.length) {
+            position = pokemonBox[pokemonBox.length - 1].position
+          } else {
+            position = pokemonBox[destination.index].position
+          }
+        this.props.movePokemon(draggableId, position, userToken)
+      }
+      else {
         if (destination.index === pokemonBox.length) {
           position = pokemonBox[pokemonBox.length - 1].position
         } else {
           position = pokemonBox[destination.index].position -1
         }
-        this.props.updateOrder(draggableId, position, userToken)
+        this.props.movePokemon(draggableId, position, userToken, true)
       }
     }
-    // POKEMON BEING HELD ID = draggableId
-
-    // if (!destination) {
-    //   return;
-    // }  else {
-    //   if (destination.droppableId === source.droppableId){
-    //
-    //     if(destination.droppableId === "pokemon-Box"){
-    //       let destination_id = pokemonBox[destination.index]
-    //       let source_id = pokemonBox[source.index]
-    //       // console.log(source_id, destination_id)
-    //     }
-    //     else{
-    //       let destination_id = pokemonTeam[destination.index]
-    //       let source_id = pokemonTeam[source.index]
-    //       // console.log(source_id, destination_id)
-    //
-    //     }
-    //
-    //   } else {
-    //     if(destination.droppableId === "pokemon-Box"){
-    //       let destination_id = pokemonBox[destination.index]
-    //       let source_id = pokemonTeam[source.index]
-    //       // console.log(source_id, destination_id)
-    //
-    //     } else {
-    //       let source_id = pokemonBox[destination.index]
-    //       let destination_id = pokemonTeam[source.index]
-    //       // console.log(source_id, destination_id)
-    //
-    //     }
-    //
-    //   }
-    //
-    // }
-
   }
 
   render() {
@@ -107,4 +87,4 @@ const mapStateToProps = ({trainer, auth}) => {
   }
 }
 
-export default connect(mapStateToProps, {updateOrder})(TeamContainer);
+export default connect(mapStateToProps, {movePokemon})(TeamContainer);

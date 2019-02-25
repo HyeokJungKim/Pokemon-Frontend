@@ -52,7 +52,7 @@ class TrainerAdapter{
     .then(res => res.json())
   }
 
-  static updateOrder(id, newPosition, token){
+  static movePokemon(id, newPosition, token, moveAcrossBoolean = false){
     return fetch(API+`/pokeballs/${id}`, {
       method: "PATCH",
       headers:{
@@ -61,7 +61,8 @@ class TrainerAdapter{
         'Authorization': token
       },
       body: JSON.stringify({
-        position: newPosition
+        position: newPosition,
+        moveAcross: moveAcrossBoolean
       })
     })
     .then(res => res.json())

@@ -15,27 +15,19 @@ export const initializePokemons = () => {
   }
 }
 
-export const updateOrder = (pokemonId, position, token) => {
+export const movePokemon = (pokemonId, position, token, moveAcrossBoolean) => {
   return (dispatch) => {
-    TrainerAdapter.updateOrder(pokemonId, position, token)
+    TrainerAdapter.movePokemon(pokemonId, position, token, moveAcrossBoolean)
     .then(json => {
       if(json.error){
         dispatch(resetState())
-      }else if(json.data.attributes.pokemon_information.onTeam){
-        dispatch(moveToTeam(json.data.attributes.pokemon_information))
-      }else{
-        dispatch(moveToBox(json.data.attributes.pokemon_information))
+      } else {
+        const pokemons = json.included.map(pokeball => pokeball.attributes.pokemon_information)
+        dispatch(initializePokemonTeam(pokemons.filter(pokemon => pokemon.onTeam)))
+        dispatch(initializePokemonBox(pokemons.filter(pokemon => !pokemon.onTeam)))
       }
     })
   }
-}
-
-export const moveToBox = (pokemon) => {
-  return {type: "MOVE_TO_BOX", payload: pokemon}
-}
-
-export const moveToTeam = (pokemon) => {
-  return {type: "MOVE_TO_TEAM", payload: pokemon}
 }
 
 export const login = (id, token) => {

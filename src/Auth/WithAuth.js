@@ -9,6 +9,7 @@ const WithAuth = (WrappedComponent) => {
       if(this.props.userToken){
         return(<WrappedComponent {...this.props}/>)
       } else if(this.props.loading){
+        console.log("SAFHSAOI");
         return null
       } else{
         return <Redirect to="/"/>
