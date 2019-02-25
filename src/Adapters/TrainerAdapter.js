@@ -51,6 +51,21 @@ class TrainerAdapter{
     })
     .then(res => res.json())
   }
+
+  static updateOrder(id, newPosition, token){
+    return fetch(API+`/pokeballs/${id}`, {
+      method: "PATCH",
+      headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token
+      },
+      body: JSON.stringify({
+        position: newPosition
+      })
+    })
+    .then(res => res.json())
+  }
 }
 
 export default TrainerAdapter

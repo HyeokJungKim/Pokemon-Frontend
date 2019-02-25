@@ -15,6 +15,29 @@ export const initializePokemons = () => {
   }
 }
 
+export const updateOrder = (pokemonId, position, token) => {
+  return (dispatch) => {
+    TrainerAdapter.updateOrder(pokemonId, position, token)
+    .then(json => {
+      if(json.error){
+        dispatch(resetState())
+      }else if(json.data.attributes.pokemon_information.onTeam){
+        dispatch(moveToTeam(json.data.attributes.pokemon_information))
+      }else{
+        dispatch(moveToBox(json.data.attributes.pokemon_information))
+      }
+    })
+  }
+}
+
+export const moveToBox = (pokemon) => {
+  return {type: "MOVE_TO_BOX", payload: pokemon}
+}
+
+export const moveToTeam = (pokemon) => {
+  return {type: "MOVE_TO_TEAM", payload: pokemon}
+}
+
 export const login = (id, token) => {
   return (dispatch) => {
     TrainerAdapter.initialize(id, token)
@@ -115,8 +138,12 @@ export const catchPokemon = (pokemon, token, experience, canFitOnTeam) => {
   return (dispatch) => {
     TrainerAdapter.catchPokemon(pokemon, token, experience, canFitOnTeam)
     .then(resp => {
-      dispatch(addExperience(experience))
-      setTimeout(() => dispatch(persistCatchedPokemon(resp.data.attributes.pokemon_information)), 1500)
+      if (resp.error) {
+        dispatch(resetState())
+      } else {
+        dispatch(addExperience(experience))
+        setTimeout(() => dispatch(persistCatchedPokemon(resp.data.attributes.pokemon_information)), 1500)
+      }
     })
   }
 }

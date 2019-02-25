@@ -45,6 +45,18 @@ const trainerReducer = (state = initState, action) => {
       } else {
         return {...state, pokemonTeam: [...state.pokemonTeam, action.payload]}
       }
+    case "MOVE_TO_BOX":
+      return {
+        ...state,
+        pokemonTeam: state.pokemonTeam.filter(pokemon => pokemon.id !== action.payload.id),
+        pokemonBox: [...state.pokemonBox, action.payload].sort((a,b) => a.position - b.position)
+      }
+    case "MOVE_TO_TEAM":
+      return {
+        ...state,
+        pokemonBox: state.pokemonBox.filter(pokemon => pokemon.id !== action.payload.id),
+        pokemonTeam: [...state.pokemonTeam, action.payload].sort((a,b) => a.position - b.position)
+      }
     default:
       return state
   }

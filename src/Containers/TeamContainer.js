@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Segment, Grid} from 'semantic-ui-react'
 
 import {connect} from 'react-redux'
+import {updateOrder} from '../Redux/Actions'
 import PokemonContainer from './PokemonContainer'
 
 import { DragDropContext} from 'react-beautiful-dnd';
@@ -11,8 +12,8 @@ class TeamContainer extends Component {
   onDragEnd = (result) => {
 
     const {destination, source, draggableId} = result
-    const {pokemonBox, pokemonTeam} = this.props
-
+    const {pokemonBox, pokemonTeam, userToken} = this.props
+    let position = 0
     if (!destination) {
       return;
     } else if (destination.droppableId === source.droppableId && destination.index === source.index) {
@@ -21,13 +22,23 @@ class TeamContainer extends Component {
       if(pokemonTeam.length >= 6){
         console.log("Invalid Move Because Too Many Pokemons");
       } else{
-        console.log(result, "valid move");
+        if (destination.index === pokemonTeam.length) {
+          position = pokemonTeam[pokemonTeam.length - 1].position
+        } else {
+          position = pokemonTeam[destination.index].position -1
+        }
+        this.props.updateOrder(draggableId, position, userToken)
       }
     } else if(destination.droppableId === "pokemonBox"){
       if (pokemonTeam.length === 1) {
         console.log("Invalid Move Because You Need One Pokemon");
       } else {
-        console.log("valid move", result);
+        if (destination.index === pokemonBox.length) {
+          position = pokemonBox[pokemonBox.length - 1].position
+        } else {
+          position = pokemonBox[destination.index].position -1
+        }
+        this.props.updateOrder(draggableId, position, userToken)
       }
     }
     // POKEMON BEING HELD ID = draggableId
@@ -88,11 +99,12 @@ class TeamContainer extends Component {
   }
 }
 
-const mapStateToProps = ({trainer}) => {
+const mapStateToProps = ({trainer, auth}) => {
   return {
     pokemonTeam: trainer.pokemonTeam,
-    pokemonBox: trainer.pokemonBox
+    pokemonBox: trainer.pokemonBox,
+    userToken: auth.userToken
   }
 }
 
-export default connect(mapStateToProps)(TeamContainer);
+export default connect(mapStateToProps, {updateOrder})(TeamContainer);
