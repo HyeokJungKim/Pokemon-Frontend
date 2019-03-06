@@ -22,7 +22,7 @@ class PokemonContainer extends PureComponent {
       <Droppable droppableId={this.props.droppableId}>
         {(provided) => {
           return(
-            <div className="ui basic segment" ref={provided.innerRef} {...provided.droppableProps}>
+            <div className="ui basic segment bordered" ref={provided.innerRef} {...provided.droppableProps}>
               <Card.Group>
                 {this.renderPokemon()}
                 {provided.placeholder}

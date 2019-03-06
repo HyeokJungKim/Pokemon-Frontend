@@ -412,3 +412,8 @@ body{
 .DarkWaterBL2{
   background-image: url("./Images/DarkWaterBL2.png");
 }
+
+.ui.basic.segment.bordered{
+  border-style: solid;
+  border-color: red;
+}

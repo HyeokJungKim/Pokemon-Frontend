@@ -9,8 +9,7 @@ import { DragDropContext} from 'react-beautiful-dnd';
 
 class TeamContainer extends Component {
 
-  onDragEnd = (result) => {
-
+  handleDrag = (result) => {
     const {destination, source, draggableId} = result
     const {pokemonBox, pokemonTeam, userToken} = this.props
     let position = 0
@@ -27,7 +26,6 @@ class TeamContainer extends Component {
             position = pokemonTeam[destination.index].position
           }
         this.props.movePokemon(draggableId, position, userToken)
-
       } else {
         if (destination.index === pokemonTeam.length) {
           position = pokemonTeam[pokemonTeam.length - 1].position + 1
@@ -37,14 +35,15 @@ class TeamContainer extends Component {
         this.props.movePokemon(draggableId, position, userToken, true)
       }
 
+
     } else if(destination.droppableId === "pokemonBox"){
       if (pokemonTeam.length === 1) {
         console.log("Invalid Move Because You Need One Pokemon");
       } else if(source.droppableId === "pokemonBox"){
           if (destination.index === pokemonBox.length) {
-            position = pokemonBox[pokemonBox.length - 1].position
+            position = pokemonBox[pokemonBox.length - 1].position + 1
           } else {
-            position = pokemonBox[destination.index].position - 1
+            position = pokemonBox[destination.index].position
           }
         this.props.movePokemon(draggableId, position, userToken)
       }
@@ -61,7 +60,7 @@ class TeamContainer extends Component {
 
   render() {
     return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
+      <DragDropContext onDragEnd={this.handleDrag}>
         <Segment basic>
           <Grid divided>
             <Grid.Row>
