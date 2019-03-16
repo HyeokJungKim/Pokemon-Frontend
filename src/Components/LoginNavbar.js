@@ -1,15 +1,19 @@
 import React,{Fragment} from 'react';
 import { Menu } from 'semantic-ui-react'
-
-const LoginNavbar = ({goLogin,goRegister}) => {
+import {Link} from 'react-router-dom'
+const LoginNavbar = () => {
 
   return (<Fragment>
-    <Menu.Item onClick={goLogin}>
-      <p>Login</p>
-    </Menu.Item>
-    <Menu.Item onClick={goRegister}>
-      <p>Register</p>
-    </Menu.Item>
+    <Link to="/login">
+      <Menu.Item className="loginButtons">
+        <p>Login</p>
+      </Menu.Item>
+    </Link>
+    <Link to="/register">
+      <Menu.Item className="loginButtons">
+        <p>Register</p>
+      </Menu.Item>
+    </Link>
   </Fragment>
 )}
 

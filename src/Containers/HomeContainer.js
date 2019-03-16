@@ -6,7 +6,7 @@ import { Segment, Container } from 'semantic-ui-react'
 const HomeContainer = (props) => {
     return (
       <Segment basic>
-        <NavBarContainer {...props}/>
+        <NavBarContainer />
         <Container fluid>
           {props.whatToDisplay(props)}
         </Container>

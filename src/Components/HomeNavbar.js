@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Menu } from 'semantic-ui-react';
+import { Menu, Button } from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {resetState} from '../Redux/Actions';
 
@@ -23,7 +23,7 @@ class HomeNavbar extends Component {
           />
           <Menu.Menu position='right'>
             <Menu.Item onClick={this.goLogout}>
-              <p>Logout</p>
+              <Button>Logout</Button>
             </Menu.Item>
           </Menu.Menu>
       </Menu>

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {Card, Header, Image} from 'semantic-ui-react'
 import {Draggable} from 'react-beautiful-dnd'
+import PokemonCardHeader from './PokemonCardHeader'
+import {connect} from 'react-redux'
 
 class PokemonCard extends Component {
 
   render() {
-    const {pokemon, index} = this.props
-    const type2 = pokemon.type_2 || ""
+    const {pokemon, index, canEvolve} = this.props
     return (
       <Draggable draggableId={pokemon.id} index={index}>
         {(provided) => {
@@ -15,16 +16,7 @@ class PokemonCard extends Component {
             <Card.Content>
               <Image floated='left' src={pokemon.image} />
               <Card.Header>
-                <Header textAlign="center">{pokemon.name}</Header>
-                <Header as='h4' textAlign="center">Level: {pokemon.level}</Header>
-                <Header as='h5' textAlign='center'>
-                  <span className={`type ${pokemon.type_1}`}>{pokemon.type_1}</span>
-                  {!!pokemon.type_2 ?
-                    <span className={`type ${type2}`}>{` ${type2}`}</span>
-                      :
-                    null
-                  }
-                </Header>
+                <PokemonCardHeader pokemon={pokemon}/>
                 <Header as='h6' textAlign="center">
                   Experience: {pokemon.experience}
                 </Header>
@@ -36,7 +28,10 @@ class PokemonCard extends Component {
     </Draggable>
     );
   }
-
 }
 
-export default PokemonCard;
+const mapStateToProps = ({pokemons}, ownProps) => {
+  const pokemon = pokemons.all.find(pokemon => ownProps.pokemon.name === pokemon.name)
+  return {canEvolve: pokemon.evolutionLevel > 0 && ownProps.pokemon.level > pokemon.evolutionLevel}
+}
+export default connect(mapStateToProps)(PokemonCard);

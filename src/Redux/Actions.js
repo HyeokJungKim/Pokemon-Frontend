@@ -4,8 +4,9 @@ import PokemonAdapter from "../Adapters/PokemonAdapter"
 export const initializePokemons = () => {
   return (dispatch) => {
     PokemonAdapter.getAllPokemons()
-    .then(resp=> {
-      dispatch(getAllPokemons(resp.data.map(pokemon => pokemon.attributes)))
+    .then(json=> {
+      console.log(json);
+      dispatch(getAllPokemons(json.data.map(pokemon => pokemon.attributes)))
       if(localStorage.getItem('token')){
         dispatch(persist(localStorage.getItem('token')))
       } else {
@@ -129,12 +130,12 @@ export const runAway = () => {
 export const catchPokemon = (pokemon, token, experience, canFitOnTeam) => {
   return (dispatch) => {
     TrainerAdapter.catchPokemon(pokemon, token, experience, canFitOnTeam)
-    .then(resp => {
-      if (resp.error) {
+    .then(json => {
+      if (json.error) {
         dispatch(resetState())
       } else {
         dispatch(addExperience(experience))
-        setTimeout(() => dispatch(persistCatchedPokemon(resp.data.attributes.pokemon_information)), 1500)
+        setTimeout(() => dispatch(persistCatchedPokemon(json.data.attributes.pokemon_information)), 1500)
       }
     })
   }
