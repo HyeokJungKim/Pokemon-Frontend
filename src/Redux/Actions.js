@@ -5,7 +5,6 @@ export const initializePokemons = () => {
   return (dispatch) => {
     PokemonAdapter.getAllPokemons()
     .then(json=> {
-      console.log(json);
       dispatch(getAllPokemons(json.data.map(pokemon => pokemon.attributes)))
       if(localStorage.getItem('token')){
         dispatch(persist(localStorage.getItem('token')))

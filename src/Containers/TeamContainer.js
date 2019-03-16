@@ -20,11 +20,7 @@ class TeamContainer extends Component {
       if(pokemonTeam.length >= 6 && source.droppableId === "pokemonBox"){
         console.log("Invalid Move Because Too Many Pokemons");
       } else if (source.droppableId === "pokemonTeam") {
-          if (destination.index === pokemonTeam.length) {
-            position = pokemonTeam[pokemonTeam.length - 1].position
-          } else {
-            position = pokemonTeam[destination.index].position
-          }
+        position = pokemonTeam[destination.index].position
         this.props.movePokemon(draggableId, position, userToken)
       } else {
         if (destination.index === pokemonTeam.length) {
@@ -37,21 +33,16 @@ class TeamContainer extends Component {
 
 
     } else if(destination.droppableId === "pokemonBox"){
-      if (pokemonTeam.length === 1) {
-        console.log("Invalid Move Because You Need One Pokemon");
+      if (pokemonTeam.length === 1 && source.droppableId === "pokemonTeam") {
       } else if(source.droppableId === "pokemonBox"){
-          if (destination.index === pokemonBox.length) {
-            position = pokemonBox[pokemonBox.length - 1].position + 1
-          } else {
-            position = pokemonBox[destination.index].position
-          }
+        position = pokemonBox[destination.index].position
         this.props.movePokemon(draggableId, position, userToken)
       }
       else {
         if (destination.index === pokemonBox.length) {
-          position = pokemonBox[pokemonBox.length - 1].position
+          position = pokemonBox[pokemonBox.length - 1].position + 1
         } else {
-          position = pokemonBox[destination.index].position -1
+          position = pokemonBox[destination.index].position - 1
         }
         this.props.movePokemon(draggableId, position, userToken, true)
       }
