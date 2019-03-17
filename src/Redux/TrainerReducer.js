@@ -29,6 +29,28 @@ const trainerReducer = (state = initState, action) => {
       } else {
         return {...state, pokemonTeam: [...state.pokemonTeam, action.payload]}
       }
+    case "EVOLVE_POKEMON":
+      if (action.payload.onTeam) {
+        return {...state, pokemonTeam: state.pokemonTeam.map(pokemon =>{
+          return (
+            pokemon.id === action.payload.id
+              ?
+              action.payload
+              :
+              pokemon
+          )
+        })}
+      } else {
+        return {...state, pokemonBox: state.pokemonBox.map(pokemon =>{
+          return (
+            pokemon.id === action.payload.id
+              ?
+              action.payload
+              :
+              pokemon
+          )
+        })}
+      }
     default:
       return state
   }

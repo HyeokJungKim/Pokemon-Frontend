@@ -65,6 +65,24 @@ export const persist = (token) => {
   }
 }
 
+export const evolvePokemon = (id, token) => {
+  return (dispatch) => {
+    TrainerAdapter.evolvePokemon(id, token)
+    .then(json => {
+      if (!json.error) {
+        dispatch(persistEvolvedPokemon(json.data.attributes.pokemon_information))
+      }
+    })
+  }
+}
+
+export const persistEvolvedPokemon = (pokemon) => {
+  return {
+    type: "EVOLVE_POKEMON",
+    payload: pokemon
+  }
+}
+
 export const initializeTrainer = (trainer) => {
   return {
     type: "INITIALIZE_TRAINER",

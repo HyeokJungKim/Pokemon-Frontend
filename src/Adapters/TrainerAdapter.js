@@ -67,6 +67,16 @@ class TrainerAdapter{
     })
     .then(res => res.json())
   }
+
+  static evolvePokemon(id, token){
+    return fetch(API+`/pokeballs/${id}/evolve`, {
+      method: "PATCH",
+      headers:{
+        'Accept': 'application/json',
+        'Authorization': token
+      }})
+      .then(res => res.json())
+  }
 }
 
 export default TrainerAdapter

@@ -1,13 +1,38 @@
 import React, { Component } from 'react';
-import {Card, Header, Image} from 'semantic-ui-react'
+import {Card, Image, Button, Container} from 'semantic-ui-react'
 import {Draggable} from 'react-beautiful-dnd'
 import PokemonCardHeader from './PokemonCardHeader'
 import {connect} from 'react-redux'
+import {evolvePokemon} from '../Redux/Actions'
 
 class PokemonCard extends Component {
 
+  displayEvolveButton = () => {
+    const {evolutionLevel, pokemon} = this.props
+    const canEvolve = pokemon.level >= evolutionLevel
+    const hasEvolution = evolutionLevel > 0
+    if (canEvolve && hasEvolution) {
+      return (
+        <Button inverted color="green" onClick={this.handleEvolution}>
+          Evolve!
+        </Button>
+      )
+    } else if(!canEvolve){
+      return (
+        <Button disabled>
+          {`Needs to be level ${evolutionLevel} to evolve.`}
+        </Button>
+      )
+    }
+  }
+
+  handleEvolution = () => {
+    const {pokemon, token, evolvePokemon} = this.props
+    evolvePokemon(pokemon.id, token)
+  }
+
   render() {
-    const {pokemon, index, canEvolve} = this.props
+    const {pokemon, index} = this.props
     return (
       <Draggable draggableId={pokemon.id} index={index}>
         {(provided) => {
@@ -15,11 +40,15 @@ class PokemonCard extends Component {
             <div className="ui fluid centered card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
             <Card.Content>
               <Image floated='left' src={pokemon.image} />
+
               <Card.Header>
                 <PokemonCardHeader pokemon={pokemon}/>
-                <Header as='h6' textAlign="center">
-                  Experience: {pokemon.experience}
-                </Header>
+                <Container textAlign="center">
+                  <p>
+                    Experience: {pokemon.experience}
+                  </p>
+                  {this.displayEvolveButton()}
+                </Container>
               </Card.Header>
             </Card.Content>
           </div>
@@ -30,8 +59,12 @@ class PokemonCard extends Component {
   }
 }
 
-const mapStateToProps = ({pokemons}, ownProps) => {
+const mapStateToProps = ({pokemons, auth}, ownProps) => {
   const pokemon = pokemons.all.find(pokemon => ownProps.pokemon.name === pokemon.name)
-  return {canEvolve: pokemon.evolutionLevel > 0 && ownProps.pokemon.level > pokemon.evolutionLevel}
+  return {
+    evolutionLevel: pokemon.evolutionLevel,
+    token: auth.userToken
+   }
 }
-export default connect(mapStateToProps)(PokemonCard);
+
+export default connect(mapStateToProps, {evolvePokemon})(PokemonCard);
