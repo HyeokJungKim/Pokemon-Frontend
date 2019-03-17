@@ -1,5 +1,6 @@
 import TrainerAdapter from "../Adapters/TrainerAdapter"
 import PokemonAdapter from "../Adapters/PokemonAdapter"
+import ItemAdapter from "../Adapters/ItemAdapter"
 
 export const initializePokemons = () => {
   return (dispatch) => {
@@ -13,6 +14,16 @@ export const initializePokemons = () => {
       }
     })
   }
+}
+
+export const initializeItems = () => {
+  return (dispatch) => {
+    ItemAdapter.getAllItems()
+    .then(json => {
+      dispatch(saveItems(json.data.map(item=> item.attributes)))
+    })
+  }
+
 }
 
 export const movePokemon = (pokemonId, position, token, moveAcrossBoolean) => {
@@ -129,6 +140,13 @@ export const getAllPokemons = (pokemonArr) => {
   return {
     type: "INITIALIZE_ALL",
     payload: pokemonArr
+  }
+}
+
+const saveItems = (itemsArr) => {
+  return {
+    type: "INITIALIZE_ITEMS",
+    payload: itemsArr
   }
 }
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import HomeNavbar from '../Components/HomeNavbar'
 import CanvasContainer from './CanvasContainer'
 import TeamContainer from './TeamContainer'
-
+import PokeMartContainer from './PokeMartContainer'
 import WithAuth from '../Auth/WithAuth'
 
 import { Segment, Container } from 'semantic-ui-react'
@@ -22,18 +22,25 @@ class GameContainer extends Component {
     this.setState({ activeTab: name })
   }
 
+  containerToDisplay = () => {
+    switch (this.state.activeTab) {
+      case "Catch Pokemon":
+        return <CanvasContainer/>
+      case "Manage Team":
+        return <TeamContainer/>
+      case "Poke Mart":
+        return <PokeMartContainer/>
+      default:
+        return <CanvasContainer/>
+    }
+  }
   render() {
-    const {activeTab} = this.state
     return (
       <Segment basic>
         <HomeNavbar {...this.props} handleItemClick={this.handleItemClick} activeTab={this.state.activeTab}/>
         <Segment attached="bottom">
           <Container fluid>
-            {activeTab === "Catch Pokemon" ?
-              <CanvasContainer/>
-            :
-              <TeamContainer/>
-          }
+            {this.containerToDisplay()}
           </Container>
         </Segment>
       </Segment>

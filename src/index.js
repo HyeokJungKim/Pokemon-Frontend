@@ -14,9 +14,11 @@ import {Provider} from 'react-redux'
 import trainerReducer from './Redux/TrainerReducer'
 import authReducer from './Redux/AuthReducer'
 import pokemonReducer from './Redux/PokemonReducer'
+import itemReducer from './Redux/ItemReducer'
+
 import { composeWithDevTools } from 'remote-redux-devtools';
 
-const rootReducer = combineReducers({trainer: trainerReducer, auth: authReducer, pokemons: pokemonReducer})
+const rootReducer = combineReducers({trainer: trainerReducer, auth: authReducer, pokemons: pokemonReducer, items: itemReducer})
 const composeEnhancers = composeWithDevTools({ realtime: true });
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))

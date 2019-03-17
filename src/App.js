@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import {connect} from 'react-redux'
-import {initializePokemons} from './Redux/Actions'
+import {initializePokemons, initializeItems} from './Redux/Actions'
 
 import HomeContainer from './Containers/HomeContainer'
 import GameContainer from './Containers/GameContainer'
@@ -15,6 +15,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.initializePokemons()
+    this.props.initializeItems()
   }
 
   whatToDisplay = (props) => {
@@ -48,4 +49,4 @@ const mapStateToProps = (state) => {
   return {userToken: state.auth.userToken}
 }
 
-export default withRouter(connect(mapStateToProps, {initializePokemons})(App))
+export default withRouter(connect(mapStateToProps, {initializePokemons, initializeItems})(App))

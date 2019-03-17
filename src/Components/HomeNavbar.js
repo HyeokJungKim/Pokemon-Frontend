@@ -15,17 +15,26 @@ class HomeNavbar extends Component {
     const {handleItemClick, activeTab} = this.props
     return (
       <Menu tabular attached="top">
-        <Menu.Item name='Catch Pokemon' active={activeTab === 'Catch Pokemon'} onClick={handleItemClick} />
-          <Menu.Item
-            name='Manage Team'
-            active={activeTab === 'Manage Team'}
-            onClick={handleItemClick}
-          />
-          <Menu.Menu position='right'>
-            <Menu.Item onClick={this.goLogout}>
-              <Button>Logout</Button>
-            </Menu.Item>
-          </Menu.Menu>
+        <Menu.Item
+          name='Catch Pokemon'
+          active={activeTab === 'Catch Pokemon'}
+          onClick={handleItemClick}
+        />
+        <Menu.Item
+          name='Manage Team'
+          active={activeTab === 'Manage Team'}
+          onClick={handleItemClick}
+        />
+        <Menu.Item
+          name='Poke Mart'
+          active={activeTab === 'Poke Mart'}
+          onClick={handleItemClick}
+        />
+        <Menu.Menu position='right'>
+          <Menu.Item onClick={this.goLogout}>
+            <Button>Logout</Button>
+          </Menu.Item>
+        </Menu.Menu>
       </Menu>
     );
   }
