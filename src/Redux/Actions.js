@@ -1,6 +1,5 @@
 import TrainerAdapter from "../Adapters/TrainerAdapter"
 import PokemonAdapter from "../Adapters/PokemonAdapter"
-import ItemAdapter from "../Adapters/ItemAdapter"
 
 export const initializePokemons = () => {
   return (dispatch) => {
@@ -16,15 +15,7 @@ export const initializePokemons = () => {
   }
 }
 
-export const initializeItems = () => {
-  return (dispatch) => {
-    ItemAdapter.getAllItems()
-    .then(json => {
-      dispatch(saveItems(json.data.map(item=> item.attributes)))
-    })
-  }
 
-}
 
 export const movePokemon = (pokemonId, position, token, moveAcrossBoolean) => {
   return (dispatch) => {
@@ -49,9 +40,13 @@ export const login = (id, token) => {
         dispatch(resetState())
       }else{
         dispatch(initializeTrainer(json.data.attributes))
-        const pokemons = json.included.map(pokeball => pokeball.attributes.pokemon_information)
+
+        const pokemons = json.included.map(pokeball => pokeball.attributes.pokemon_information).filter(Boolean)
+        const items = json.included.map(item => item.attributes.inventory_information).filter(Boolean)
+
         dispatch(initializePokemonTeam(pokemons.filter(pokemon => pokemon.onTeam)))
         dispatch(initializePokemonBox(pokemons.filter(pokemon => !pokemon.onTeam)))
+        dispatch(saveItems(items))
       }
     })
   }
@@ -68,9 +63,11 @@ export const persist = (token) => {
         dispatch(initializeToken(token))
         dispatch(toggleLoading(false))
         dispatch(initializeTrainer(json.data.attributes))
-        const pokemons = json.included.map(pokeball => pokeball.attributes.pokemon_information)
+        const pokemons = json.included.map(pokeball => pokeball.attributes.pokemon_information).filter(Boolean)
+        const items = json.included.map(item => item.attributes.inventory_information).filter(Boolean)
         dispatch(initializePokemonTeam(pokemons.filter(pokemon => pokemon.onTeam)))
         dispatch(initializePokemonBox(pokemons.filter(pokemon => !pokemon.onTeam)))
+        dispatch(saveItems(items))
       }
     })
   }

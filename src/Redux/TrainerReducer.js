@@ -2,6 +2,7 @@ const initState = {
   pokemonTeam: [],
   pokemonBox : [],
   trainer: {},
+  items: []
 }
 
 const trainerReducer = (state = initState, action) => {
@@ -51,6 +52,9 @@ const trainerReducer = (state = initState, action) => {
           )
         })}
       }
+
+    case "INITIALIZE_ITEMS":
+      return {...state, items: action.payload}
     default:
       return state
   }
