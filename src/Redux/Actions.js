@@ -1,5 +1,6 @@
 import TrainerAdapter from "../Adapters/TrainerAdapter"
 import PokemonAdapter from "../Adapters/PokemonAdapter"
+import ItemAdapter from "../Adapters/ItemAdapter"
 
 export const initializePokemons = () => {
   return (dispatch) => {
@@ -77,11 +78,30 @@ export const evolvePokemon = (id, token) => {
   return (dispatch) => {
     TrainerAdapter.evolvePokemon(id, token)
     .then(json => {
-      if (!json.error) {
+      if (json.error) {
+        dispatch(resetState())
+      } else{
         dispatch(persistEvolvedPokemon(json.data.attributes.pokemon_information))
       }
     })
   }
+}
+
+export const buyItems = (token, itemsArray) => {
+  return (dispatch) => {
+    ItemAdapter.buyItems(token, itemsArray)
+    .then(json => {
+      if (json.error) {
+        dispatch(resetState())
+      } else {
+        console.log(json);
+        let items = json.included.map(item => item.attributes.inventory_information).filter(Boolean)
+        dispatch(initializeTrainer(json.data.attributes))
+        dispatch(saveItems(items))
+      }
+    })
+  }
+
 }
 
 export const persistEvolvedPokemon = (pokemon) => {
