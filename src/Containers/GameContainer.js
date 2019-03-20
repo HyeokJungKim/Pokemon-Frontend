@@ -18,8 +18,13 @@ class GameContainer extends Component {
   }
 
   handleItemClick = (e, { name }) => {
-    this.props.runAway()
     this.setState({ activeTab: name })
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.activeTab === "Catch Pokemon"){
+      this.props.runAway()
+    }
   }
 
   containerToDisplay = () => {

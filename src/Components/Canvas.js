@@ -51,7 +51,7 @@ class Canvas extends Component {
   }
 
   findRandom = () => {
-    if(Math.random() < 0.25){
+    if(Math.random() < 0.20){
       this.props.getRandom()
     }
   }
@@ -64,28 +64,28 @@ class Canvas extends Component {
         case "KeyW":
           if(position > 15 ){
             this.setState((prevState) =>
-              {return {trainer: prevState.trainer - 16}}, this.findRandom()
+              {return {trainer: prevState.trainer - 16}}, this.findRandom
             )
           }
           break;
         case "KeyS":
           if(position < 240){
             this.setState((prevState) =>
-              {return {trainer: prevState.trainer + 16}}, this.findRandom()
+              {return {trainer: prevState.trainer + 16}}, this.findRandom
             )
           }
           break;
         case "KeyA":
           if(modulo !== 0){
             this.setState((prevState) =>
-              {return {trainer: prevState.trainer - 1}}, this.findRandom()
+              {return {trainer: prevState.trainer - 1}}, this.findRandom
             )
           }
           break;
         case "KeyD":
           if(modulo !== 15){
             this.setState((prevState) =>
-              {return {trainer: prevState.trainer + 1}}, this.findRandom()
+              {return {trainer: prevState.trainer + 1}}, this.findRandom
             )
           }
           break;
@@ -101,14 +101,15 @@ class Canvas extends Component {
       <Segment basic>
         {this.props.noPokemonOnDisplay ?
         <div id="canvas">
-
-        {this.state.blueprint.map((name,index)=> {
-          if(index === this.state.trainer){
-            return <PixelTrainer key={index} name={name} />
-          }else{
-            return <Pixel key={index} name={name}/>
+          {
+            this.state.blueprint.map((name,index)=> {
+              if(index === this.state.trainer){
+                return <PixelTrainer key={index} name={name} />
+              }else{
+                return <Pixel key={index} name={name}/>
+              }
+            })
           }
-        })}
         </div>
           :
         <NewPokemon
