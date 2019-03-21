@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import {Image, Card, Button} from 'semantic-ui-react'
-import {connect} from 'react-redux'
 import ExperienceNotification from './ExperienceNotification'
-import PokemonCardHeader from './PokemonCardHeader'
-import {runAway, catchPokemon} from '../Redux/Actions'
+import {connect} from 'react-redux'
+import PokemonBattle from './PokemonBattle'
 
 class NewPokemon extends Component {
 
@@ -23,43 +21,30 @@ class NewPokemon extends Component {
   }
 
   render() {
-    const {displayedPokemon, catchPokemon, runAway, token, experience, canFitOnTeam} = this.props
+    const {displayedPokemon, experience} = this.props
     return(
       <Fragment>
         {this.state.displayExperience ?
-          <ExperienceNotification displayedPokemon={displayedPokemon} experience={experience}/>
+          <ExperienceNotification
+            displayedPokemon={displayedPokemon}
+            experience={experience}
+          />
             :
-            <Card centered>
-            <Card.Content>
-              <Image floated='left' src={displayedPokemon.image} />
-              <Card.Header>
-                <PokemonCardHeader pokemon={displayedPokemon}/>
-              </Card.Header>
-              <div className='ui two buttons'>
-                <Button basic color='green' onClick={() => {
-                    this.toggleDisplay()
-                    catchPokemon(displayedPokemon, token, experience, canFitOnTeam)
-                  }
-                }>
-                  Catch
-                </Button>
-                <Button basic color='red' onClick={runAway}>
-                  Run Away
-                </Button>
-              </div>
-            </Card.Content>
-          </Card>
+          <PokemonBattle
+            toggleDisplay={this.toggleDisplay}
+            experience={experience}
+            displayedPokemon={displayedPokemon}
+          />
         }
     </Fragment>)
   }
 }
 
-const mapStateToProps = ({pokemons, auth, trainer}) => {
+
+const mapStateToProps = ({pokemons}) => {
   return {
     displayedPokemon: pokemons.displayedPokemon,
-    token: auth.userToken,
-    canFitOnTeam: trainer.pokemonTeam.length < 6
   }
 }
 
-export default connect(mapStateToProps, {runAway, catchPokemon})(NewPokemon);
+export default connect(mapStateToProps)(NewPokemon);
