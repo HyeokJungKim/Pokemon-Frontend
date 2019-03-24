@@ -51,7 +51,7 @@ class Canvas extends Component {
   }
 
   findRandom = () => {
-    if(Math.random() < 0.20){
+    if(Math.random() < this.props.catchRate){
       this.props.getRandom()
     }
   }
@@ -126,6 +126,7 @@ class Canvas extends Component {
 const mapStateToProps = ({pokemons}) => {
   return {
     noPokemonOnDisplay: !pokemons.displayedPokemon.name,
+    catchRate: pokemons.catchRate
   }
 }
 

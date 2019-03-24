@@ -1,6 +1,7 @@
 const initState = {
   all: [],
-  displayedPokemon: {}
+  displayedPokemon: {},
+  catchRate: 0.2
 }
 
 const pokemonReducer = (state = initState, action) => {
