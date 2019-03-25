@@ -3,17 +3,18 @@ import {connect} from 'react-redux'
 import ChooseBall from '../Components/ChooseBall'
 import {List, Container, Header, Icon} from 'semantic-ui-react'
 
-const ChooseItem = ({items, toggleBag, tryCatchPokemon}) => {
+const ChooseItem = ({items, toggleDisplay, tryCatchPokemon}) => {
+  const handleClick = () => toggleDisplay(false, "showBag")
   return(
     <Container textAlign='center'>
-      <Header as='h2'>Your Bag<Icon link color='red' name='close' size='tiny' onClick={toggleBag}/></Header>
+      <Header as='h2'>Your Bag<Icon link color='red' name='close' size='tiny' onClick={handleClick}/></Header>
       <div id="bag">
         <List divided>
           {items.map(item => (
             <ChooseBall
               key={item.id}
               item={item}
-              toggleBag={toggleBag}
+              toggleDisplay={toggleDisplay}
               tryCatchPokemon={tryCatchPokemon}
             />)
           )}

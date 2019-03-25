@@ -1,11 +1,11 @@
 import React from 'react';
 import {List, Image, Button} from 'semantic-ui-react'
 
-const ChooseBall = ({item, toggleBag, tryCatchPokemon}) => {
+const ChooseBall = ({item, toggleDisplay, tryCatchPokemon}) => {
 
   const handleClick = () => {
     tryCatchPokemon(item.id)
-    toggleBag()
+    toggleDisplay(false, "showBag")
   }
 
   return (

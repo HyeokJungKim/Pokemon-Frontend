@@ -10,8 +10,8 @@ class PokemonBattle extends Component {
 
   constructor(props) {
     super(props);
-    let iv = Math.floor(Math.random() * 12)
-    let ev = Math.floor(Math.random() * 46) + 5
+    let iv = Math.floor(Math.random() * 10) + 2
+    let ev = Math.floor(Math.random() * 45) + 5
     let {level} = props.displayedPokemon
     let health = Math.floor((200 + iv + ev) * level / 100) + level + 10
     this.state = {
@@ -19,6 +19,7 @@ class PokemonBattle extends Component {
       disabled: false,
       showTeam: false,
       showBag: false,
+      error: "",
       health
     }
   }
@@ -43,21 +44,25 @@ class PokemonBattle extends Component {
         setTimeout(runAway, 1000)
         return {health: 0, disabled: true}
       } else {
-        return {health: prevState.health - healthLost}
+        return {health: prevState.health - healthLost, error: ""}
       }
     })
   }
 
-  toggleTeamChoose = () => {
-    this.setState((prevState) => {
-      return {showTeam: !prevState.showTeam, disabled: !prevState.disabled}
-    })
+  toggleDisplay = (bool, whichShow) => {
+    if (bool) {
+      this.setState({[whichShow]: bool, disabled: bool, error: ""})
+    } else {
+      this.setState({[whichShow]: bool, disabled: bool})
+    }
   }
 
-  toggleBag = () => {
-    this.setState((prevState) => {
-      return {showBag: !prevState.showBag, disabled: !prevState.disabled}
-    })
+  switchPokemon = () => {
+    this.toggleDisplay(true, "showTeam")
+  }
+
+  switchToBag = () => {
+    this.toggleDisplay(true, "showBag")
   }
 
   tryCatchPokemon = (ballId) => {
@@ -90,13 +95,13 @@ class PokemonBattle extends Component {
     if (hpFactor > randomNumber) {
       handleCatch(ballId)
     } else{
-      patchPokeball(token, ballId)
+      this.setState({error: "Aargh! Almost had it!"}, () => {patchPokeball(token, ballId)})
     }
   }
 
   render() {
     const {displayedPokemon, runAway, firstPokemonId, changePokemonFighting, pokemonFighting} = this.props
-    let {disabled, showTeam, showBag} = this.state
+    let {disabled, showTeam, showBag, error} = this.state
     return(
       <Container>
         <Segment basic>
@@ -120,7 +125,9 @@ class PokemonBattle extends Component {
               </Grid.Column>
 
             </Grid.Row>
-
+            <Container textAlign='center'>
+              {error}
+            </Container>
             <Grid.Row>
               <Grid.Column width={6}>
                 <Image centered src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/${firstPokemonId}.png`}/>
@@ -137,19 +144,19 @@ class PokemonBattle extends Component {
               <Grid.Column width={10}>
                 <Segment basic padded>
                   <div className='ui two buttons'>
-                    <Button basic color='grey' onClick={this.loseHealth} disabled={disabled}>
+                    <Button basic color='green' onClick={this.loseHealth} disabled={disabled}>
                       Attack
                     </Button>
-                    <Button basic color='grey' onClick={this.toggleBag} disabled={disabled}>
+                    <Button basic color='pink' onClick={this.switchToBag} disabled={disabled}>
                       Catch {displayedPokemon.name}
                     </Button>
                   </div>
 
                   <div className='ui two buttons'>
-                    <Button basic color='grey' onClick={this.toggleTeamChoose} disabled={disabled}>
+                    <Button basic color='violet' onClick={this.switchPokemon} disabled={disabled}>
                       Switch Pokemon
                     </Button>
-                    <Button basic color='grey' onClick={runAway} disabled={disabled}>
+                    <Button basic color='red' onClick={runAway} disabled={disabled}>
                       Run Away
                     </Button>
                   </div>
@@ -164,7 +171,7 @@ class PokemonBattle extends Component {
           ?
             <ChoosePokemonTeam
               changePokemonFighting={changePokemonFighting}
-              toggleTeamChoose={this.toggleTeamChoose}
+              toggleDisplay={this.toggleDisplay}
             />
           :
             null
@@ -172,7 +179,7 @@ class PokemonBattle extends Component {
         {showBag
           ?
             <ChooseItem
-              toggleBag={this.toggleBag}
+              toggleDisplay={this.toggleDisplay}
               tryCatchPokemon={this.tryCatchPokemon}
             />
           :
