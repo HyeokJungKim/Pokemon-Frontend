@@ -24,6 +24,8 @@ const trainerReducer = (state = initState, action) => {
       return {...state, pokemonBox: action.payload}
     case "RESET_STATE":
       return initState
+    case "INCREASE_MONEY":
+      return {...state, trainer: {...state.trainer, money: state.trainer.money + action.payload}}
     case "CATCH_POKEMON":
       if (state.pokemonTeam.length >= 6) {
         return {...state, pokemonBox: [...state.pokemonBox, action.payload]}

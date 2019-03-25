@@ -33,6 +33,7 @@ class Canvas extends Component {
         "DarkWaterBR","CenterWater","CenterWater","CenterWater","DarkWaterR","BridgeWater2","BridgeWater","BridgeWater","BridgeWater","BridgeWater","BridgeWater","BotBridge","BridgeWater","BridgeWater","BridgeWater3","DarkWater"
       ],
       experience: 0,
+      money: 0,
     };
   }
 
@@ -44,9 +45,10 @@ class Canvas extends Component {
     document.removeEventListener("keydown", this.moveTrainer, false)
   }
 
-  changeExperience = () => {
+  changeExpAndMoney = () => {
     this.setState({
-      experience: Math.floor(Math.random() * 5 * this.props.displayedPokemon.level ) + 50
+      experience: Math.floor(Math.random() * 5 * this.props.displayedPokemon.level ) + 50,
+      money: Math.floor(Math.random() * 20 * this.props.displayedPokemon.level ) + 50
     })
   }
 
@@ -113,7 +115,8 @@ class Canvas extends Component {
         </div>
           :
         <NewPokemon
-          changeExperience={this.changeExperience}
+          changeExpAndMoney={this.changeExpAndMoney}
+          money={this.state.money}
           experience={this.state.experience}
         />
         }

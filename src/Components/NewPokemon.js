@@ -16,14 +16,14 @@ class NewPokemon extends Component {
   }
 
   componentDidMount() {
-    this.props.changeExperience()
+    this.props.changeExpAndMoney()
   }
 
   handleCatch = (ballId) => {
-    const {displayedPokemon, catchPokemon, token, pokemonTeam, experience} = this.props
+    const {displayedPokemon, catchPokemon, token, pokemonTeam, experience, money} = this.props
     let canFitOnTeam = pokemonTeam.length < 6
     this.setState({displayExperience: true}, () => {
-      catchPokemon(displayedPokemon, token, experience, ballId, canFitOnTeam)
+      catchPokemon(displayedPokemon, token, experience, ballId, canFitOnTeam, money)
     })
   }
 
@@ -33,13 +33,14 @@ class NewPokemon extends Component {
   }
 
   render() {
-    const {displayedPokemon, experience} = this.props
+    const {displayedPokemon, experience, money} = this.props
     return(
       <Fragment>
         {this.state.displayExperience ?
           <ExperienceNotification
             displayedPokemon={displayedPokemon}
             experience={experience}
+            money={money}
           />
             :
           <PokemonBattle

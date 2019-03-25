@@ -186,22 +186,23 @@ export const runAway = () => {
   }
 }
 
-export const catchPokemon = (pokemon, token, experience, ballId, canFitOnTeam) => {
+export const catchPokemon = (pokemon, token, experience, ballId, canFitOnTeam, money) => {
   return (dispatch) => {
-    TrainerAdapter.catchPokemon(pokemon, token, experience, ballId, canFitOnTeam)
+    TrainerAdapter.catchPokemon(pokemon, token, experience, ballId, canFitOnTeam, money)
     .then(json => {
       if (json.error) {
         dispatch(resetState())
       } else {
         dispatch(addExperience(experience))
         dispatch(useBall(ballId))
-        setTimeout(() => dispatch(persistCatchedPokemon(json.data.attributes.pokemon_information)), 2000)
+        dispatch(increaseMoney(money))
+        setTimeout(() => dispatch(catchPokemonFrontEnd(json.data.attributes.pokemon_information)), 2000)
       }
     })
   }
 }
 
-export const persistCatchedPokemon = (pokemon) => {
+export const catchPokemonFrontEnd = (pokemon) => {
   return {
     type: "CATCH_POKEMON",
     payload: pokemon
@@ -212,6 +213,13 @@ export const useBall = (ballId) => {
   return {
     type: "USE_BALL",
     payload: ballId
+  }
+}
+
+export const increaseMoney = (money) => {
+  return {
+    type: "INCREASE_MONEY",
+    payload: money
   }
 }
 
