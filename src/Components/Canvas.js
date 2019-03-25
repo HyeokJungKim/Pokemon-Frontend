@@ -46,18 +46,18 @@ class Canvas extends Component {
 
   changeExperience = () => {
     this.setState({
-      experience: Math.floor(Math.random() * 200 ) + 50
+      experience: Math.floor(Math.random() * 5 * this.props.displayedPokemon.level ) + 50
     })
   }
 
   findRandom = () => {
-    if(Math.random() < this.props.catchRate){
+    if(Math.random() < this.props.encounterRate){
       this.props.getRandom()
     }
   }
 
   moveTrainer = (e) => {
-    if(this.props.noPokemonOnDisplay){
+    if(!this.props.displayedPokemon.name){
       const position = this.state.trainer
       const modulo = position % 16
       switch (e.code) {
@@ -99,7 +99,7 @@ class Canvas extends Component {
   render() {
     return (
       <Segment basic>
-        {this.props.noPokemonOnDisplay ?
+        {!this.props.displayedPokemon.name ?
         <div id="canvas">
           {
             this.state.blueprint.map((name,index)=> {
@@ -125,8 +125,8 @@ class Canvas extends Component {
 
 const mapStateToProps = ({pokemons}) => {
   return {
-    noPokemonOnDisplay: !pokemons.displayedPokemon.name,
-    catchRate: pokemons.catchRate
+    displayedPokemon: pokemons.displayedPokemon,
+    encounterRate: pokemons.encounterRate
   }
 }
 

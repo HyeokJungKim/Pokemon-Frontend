@@ -53,7 +53,7 @@ class TeamContainer extends Component {
     return (
       <DragDropContext onDragEnd={this.handleDrag}>
         <Segment basic>
-          <Grid divided>
+          <Grid divided stackable>
             <Grid.Row>
               <Grid.Column width={6}>
                 <PokemonContainer pokemons={this.props.pokemonTeam} droppableId={"pokemonTeam"}/>

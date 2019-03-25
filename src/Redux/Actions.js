@@ -81,7 +81,7 @@ export const evolvePokemon = (id, token) => {
       if (json.error) {
         dispatch(resetState())
       } else{
-        dispatch(persistEvolvedPokemon(json.data.attributes.pokemon_information))
+        dispatch(savePokemonFrontEnd(json.data.attributes.pokemon_information))
       }
     })
   }
@@ -101,10 +101,17 @@ export const buyItems = (token, itemsArray) => {
       }
     })
   }
+}
+
+export const patchPokeball = (token, ballId) => {
+  return (dispatch) => {
+    ItemAdapter.useBall(token, ballId)
+    .then(json => dispatch(useBall(json.id)))
+  }
 
 }
 
-export const persistEvolvedPokemon = (pokemon) => {
+export const savePokemonFrontEnd = (pokemon) => {
   return {
     type: "EVOLVE_POKEMON",
     payload: pokemon
@@ -179,15 +186,16 @@ export const runAway = () => {
   }
 }
 
-export const catchPokemon = (pokemon, token, experience, canFitOnTeam) => {
+export const catchPokemon = (pokemon, token, experience, ballId, canFitOnTeam) => {
   return (dispatch) => {
-    TrainerAdapter.catchPokemon(pokemon, token, experience, canFitOnTeam)
+    TrainerAdapter.catchPokemon(pokemon, token, experience, ballId, canFitOnTeam)
     .then(json => {
       if (json.error) {
         dispatch(resetState())
       } else {
         dispatch(addExperience(experience))
-        setTimeout(() => dispatch(persistCatchedPokemon(json.data.attributes.pokemon_information)), 1500)
+        dispatch(useBall(ballId))
+        setTimeout(() => dispatch(persistCatchedPokemon(json.data.attributes.pokemon_information)), 2000)
       }
     })
   }
@@ -197,6 +205,13 @@ export const persistCatchedPokemon = (pokemon) => {
   return {
     type: "CATCH_POKEMON",
     payload: pokemon
+  }
+}
+
+export const useBall = (ballId) => {
+  return {
+    type: "USE_BALL",
+    payload: ballId
   }
 }
 

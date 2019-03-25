@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import ExperienceNotification from './ExperienceNotification'
 import {connect} from 'react-redux'
+import {catchPokemon} from '../Redux/Actions'
+
 import PokemonBattle from './PokemonBattle'
 
 class NewPokemon extends Component {
@@ -8,7 +10,8 @@ class NewPokemon extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayExperience: false
+      displayExperience: false,
+      pokemonFighting: props.pokemonTeam[0]
     };
   }
 
@@ -16,8 +19,17 @@ class NewPokemon extends Component {
     this.props.changeExperience()
   }
 
-  toggleDisplay = () => {
-    this.setState({displayExperience: true})
+  handleCatch = (ballId) => {
+    const {displayedPokemon, catchPokemon, token, pokemonTeam, experience} = this.props
+    let canFitOnTeam = pokemonTeam.length < 6
+    this.setState({displayExperience: true}, () => {
+      catchPokemon(displayedPokemon, token, experience, ballId, canFitOnTeam)
+    })
+  }
+
+  changePokemonFighting = (id) => {
+    let pokemon = this.props.pokemonTeam.find(pokemon => pokemon.id === id)
+    this.setState({pokemonFighting: pokemon})
   }
 
   render() {
@@ -31,9 +43,10 @@ class NewPokemon extends Component {
           />
             :
           <PokemonBattle
-            toggleDisplay={this.toggleDisplay}
-            experience={experience}
+            handleCatch={this.handleCatch}
             displayedPokemon={displayedPokemon}
+            pokemonFighting={this.state.pokemonFighting}
+            changePokemonFighting={this.changePokemonFighting}
           />
         }
     </Fragment>)
@@ -41,10 +54,12 @@ class NewPokemon extends Component {
 }
 
 
-const mapStateToProps = ({pokemons}) => {
+const mapStateToProps = ({pokemons, auth, trainer}) => {
   return {
     displayedPokemon: pokemons.displayedPokemon,
+    token: auth.userToken,
+    pokemonTeam: trainer.pokemonTeam,
   }
 }
 
-export default connect(mapStateToProps)(NewPokemon);
+export default connect(mapStateToProps, {catchPokemon})(NewPokemon);

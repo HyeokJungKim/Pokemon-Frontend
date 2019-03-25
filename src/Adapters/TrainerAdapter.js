@@ -35,7 +35,7 @@ class TrainerAdapter{
     .then(res => res.json())
   }
 
-  static catchPokemon(pokemon, token, experience, canFitOnTeam){
+  static catchPokemon(pokemon, token, experience, ballId, canFitOnTeam){
     return fetch(API+`/catch/${pokemon.id}`, {
       method: "POST",
       headers:{
@@ -47,6 +47,7 @@ class TrainerAdapter{
         level: pokemon.level,
         experience: experience,
         canFitOnTeam: canFitOnTeam,
+        ballId: ballId
       })
     })
     .then(res => res.json())

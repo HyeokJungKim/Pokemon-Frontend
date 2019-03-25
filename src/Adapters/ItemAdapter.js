@@ -2,7 +2,7 @@ const API = "http://localhost:3000/"
 
 class ItemAdapter{
   static buyItems(token, itemsArray){
-    return fetch(API+"/inventories", {
+    return fetch(API+"inventories", {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
@@ -10,6 +10,17 @@ class ItemAdapter{
         'Authorization': token
       },
       body: JSON.stringify({itemsArray})
+    })
+    .then(resp => resp.json())
+  }
+
+  static useBall(token, ballId){
+    return fetch(API+`inventories/${ballId}`, {
+      method: "PATCH",
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': token
+      }
     })
     .then(resp => resp.json())
   }

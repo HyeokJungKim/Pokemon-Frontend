@@ -52,9 +52,13 @@ const trainerReducer = (state = initState, action) => {
           )
         })}
       }
-
     case "INITIALIZE_ITEMS":
       return {...state, items: action.payload}
+    case "USE_BALL":
+      let foundBall = state.items.find(item => item.id === action.payload)
+      let alteredBall = {...foundBall, quantity: foundBall.quantity - 1}
+      return {...state, items: state.items.map(item => {
+        return (item.id === alteredBall.id ? alteredBall : item)})}
     default:
       return state
   }
