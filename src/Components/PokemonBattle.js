@@ -72,7 +72,7 @@ class PokemonBattle extends Component {
     let randomNumber = 255
     switch (ball.name) {
       case "Master Ball":
-        handleCatch()
+        handleCatch(ballId)
         break;
       case "Poke Ball":
         randomNumber = Math.floor(Math.random() * 200) + 55
@@ -126,7 +126,9 @@ class PokemonBattle extends Component {
 
             </Grid.Row>
             <Container textAlign='center'>
-              {error}
+              <Header as='h2' color='red'>
+                {error}
+              </Header>
             </Container>
             <Grid.Row>
               <Grid.Column width={6}>

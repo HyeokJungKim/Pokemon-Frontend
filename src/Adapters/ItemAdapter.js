@@ -12,6 +12,7 @@ class ItemAdapter{
       body: JSON.stringify({itemsArray})
     })
     .then(resp => resp.json())
+    .catch(console.error)
   }
 
   static useBall(token, ballId){
@@ -23,6 +24,7 @@ class ItemAdapter{
       }
     })
     .then(resp => resp.json())
+    .catch(console.error)
   }
 
 }

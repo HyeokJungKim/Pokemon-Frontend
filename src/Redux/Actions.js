@@ -94,7 +94,6 @@ export const buyItems = (token, itemsArray) => {
       if (json.error) {
         dispatch(resetState())
       } else {
-        console.log(json);
         let items = json.included.map(item => item.attributes.inventory_information).filter(Boolean)
         dispatch(initializeTrainer(json.data.attributes))
         dispatch(saveItems(items))

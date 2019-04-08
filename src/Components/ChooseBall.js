@@ -9,7 +9,7 @@ const ChooseBall = ({item, toggleDisplay, tryCatchPokemon}) => {
   }
 
   return (
-    <List.Item onClick={handleClick}>
+    <List.Item>
       <Image floated='left' src={item.image} avatar/>
       <List.Content floated='left'>
         <List.Header>{item.name}</List.Header>
@@ -17,7 +17,7 @@ const ChooseBall = ({item, toggleDisplay, tryCatchPokemon}) => {
           Quantity: {item.quantity}
         </List.Description>
       </List.Content>
-      <Button floated='right' disabled={item.quantity === 0}>Use</Button>
+      <Button floated='right' disabled={item.quantity === 0} onClick={handleClick}>Use</Button>
     </List.Item>
   );
 }

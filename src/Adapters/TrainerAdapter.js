@@ -11,6 +11,7 @@ class TrainerAdapter{
       body: JSON.stringify({trainer: data})
     })
     .then(res => res.json())
+    .catch(console.error)
   }
 
   static persist(token){
@@ -22,6 +23,7 @@ class TrainerAdapter{
       }
     })
     .then(res => res.json())
+    .catch(console.error)
   }
 
   static initialize(id, token){
@@ -33,6 +35,7 @@ class TrainerAdapter{
       }
     })
     .then(res => res.json())
+    .catch(console.error)
   }
 
   static catchPokemon(pokemon, token, experience, ballId, canFitOnTeam, money){
@@ -52,6 +55,7 @@ class TrainerAdapter{
       })
     })
     .then(res => res.json())
+    .catch(console.error)
   }
 
   static movePokemon(id, newPosition, token, moveAcrossBoolean = false){
@@ -68,6 +72,7 @@ class TrainerAdapter{
       })
     })
     .then(res => res.json())
+    .catch(console.error)
   }
 
   static evolvePokemon(id, token){
@@ -78,6 +83,7 @@ class TrainerAdapter{
         'Authorization': token
       }})
       .then(res => res.json())
+      .catch(console.error)
   }
 }
 
