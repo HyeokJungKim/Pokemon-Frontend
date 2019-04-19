@@ -44,16 +44,18 @@ class LoginForm extends Component {
     return (
       <Container text>
         {this.state.error}
-        <Header textAlign='center'>Pokémon Stay</Header>
+        <Header textAlign='center'>Sign In</Header>
         <Segment raised textAlign='center'>
           <Form onSubmit={this.handleSubmit}>
             <Form.Field inline>
-              <label>Username:</label>
-              <Input name="username" onChange={this.handleChange} value={this.state.username}/>
+              <label>Username:
+                <Input name="username" onChange={this.handleChange} value={this.state.username}/>
+              </label>
             </Form.Field>
             <Form.Field inline>
-              <label>Password:</label>
-              <Input name="password" onChange={this.handleChange} value={this.state.password} type="password"/>
+              <label>Password:
+                <Input name="password" onChange={this.handleChange} value={this.state.password} type="password"/>
+              </label>
             </Form.Field>
             <Button type="submit">Login</Button>
           </Form>
