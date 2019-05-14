@@ -14,6 +14,19 @@ class TrainerAdapter{
     .catch(console.error)
   }
 
+  static register(data){
+    return fetch(`${API}/users`, {
+      method: "POST",
+      headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({trainer: data})
+    })
+    .then(res => res.json())
+    .catch(console.error)
+  }
+
   static persist(token){
     return fetch(`${API}/trainers/persist`, {
       method: "GET",
