@@ -34,12 +34,19 @@ class PokeMartContainer extends Component{
   didPropsChange = () => {
     let stateCartQuantity = this.state.cart.map(item => item.quantity)
     let propsCartQuantity = this.props.items.map(item => item.quantity)
+    // let bool = false
+    // stateCartQuantity.forEach((quantity, index) => {
+    //   if (quantity !== propsCartQuantity[index]){
+    //     bool = true
+    //   }
+    // })
+    // return bool
     for (let i = 0; i < stateCartQuantity.length; i++) {
-      if (stateCartQuantity[i] !== propsCartQuantity[i]) {
-        return false
+      if(stateCartQuantity[i] !== propsCartQuantity[i]){
+        return true
       }
     }
-    return true
+    return false
   }
 
   handleChange = (event, id) => {
