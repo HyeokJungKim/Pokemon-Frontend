@@ -2,10 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {Header} from 'semantic-ui-react'
 
-const ExperienceNotification = ({displayedPokemon, experience, greaterThanSix, money}) => {
+const ExperienceNotification = ({displayedPokemon, experience, greaterThanSix, money, catchingPokemon}) => {
   return (
     <Header as="h2" textAlign="center">
-      {greaterThanSix ?
+      {greaterThanSix && catchingPokemon ?
         <div>
           Each pokemon in your team has gained {experience} points!
           <br/>

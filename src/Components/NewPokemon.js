@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ExperienceNotification from './ExperienceNotification'
 import {connect} from 'react-redux'
-import {catchPokemon} from '../Redux/Actions'
+import {catchPokemon, patchExperience} from '../Redux/Actions'
 
 import PokemonBattle from './PokemonBattle'
 
@@ -11,19 +11,27 @@ class NewPokemon extends Component {
     super(props);
     this.state = {
       displayExperience: false,
-      pokemonFighting: props.pokemonTeam[0]
+      pokemonFighting: props.pokemonTeam[0],
+      catchingPokemon: true,
     };
   }
 
   componentDidMount() {
     this.props.changeExpAndMoney()
   }
-  
+
   handleCatch = (ballId) => {
-    const {displayedPokemon, catchPokemon, token, pokemonTeam, experience, money} = this.props
+    const {displayedPokemon, catchPokemon, pokemonTeam, experience, money} = this.props
     let canFitOnTeam = pokemonTeam.length < 6
     this.setState({displayExperience: true}, () => {
-      catchPokemon(displayedPokemon, token, experience, ballId, canFitOnTeam, money)
+      catchPokemon(displayedPokemon, experience, ballId, canFitOnTeam, money)
+    })
+  }
+
+  handleExperience = () => {
+    const {patchExperience, experience, money} = this.props
+    this.setState({catchingPokemon: false, displayExperience: true}, () => {
+      patchExperience(experience, money)
     })
   }
 
@@ -41,10 +49,12 @@ class NewPokemon extends Component {
             displayedPokemon={displayedPokemon}
             experience={experience}
             money={money}
+            catchingPokemon={this.state.catchingPokemon}
           />
             :
           <PokemonBattle
             handleCatch={this.handleCatch}
+            handleExperience={this.handleExperience}
             displayedPokemon={displayedPokemon}
             pokemonFighting={this.state.pokemonFighting}
             changePokemonFighting={this.changePokemonFighting}
@@ -55,12 +65,11 @@ class NewPokemon extends Component {
 }
 
 
-const mapStateToProps = ({pokemons, auth, trainer}) => {
+const mapStateToProps = ({pokemons, trainer}) => {
   return {
     displayedPokemon: pokemons.displayedPokemon,
-    token: auth.userToken,
     pokemonTeam: trainer.pokemonTeam,
   }
 }
 
-export default connect(mapStateToProps, {catchPokemon})(NewPokemon);
+export default connect(mapStateToProps, {catchPokemon, patchExperience})(NewPokemon);

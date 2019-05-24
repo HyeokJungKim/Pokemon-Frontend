@@ -37,11 +37,11 @@ class PokemonBattle extends Component {
   }
 
   loseHealth = () => {
-    let {pokemonFighting, displayedPokemon, runAway} = this.props
+    let {pokemonFighting, displayedPokemon, handleExperience} = this.props
     let healthLost = Math.floor(((2 * pokemonFighting.level / 5 + 2) * 40 * pokemonFighting.level/displayedPokemon.level)/50 ) + 2 * Math.floor(Math.random() * 2) +1
     this.setState((prevState) => {
       if (prevState.health - healthLost < 0) {
-        setTimeout(runAway, 1000)
+        handleExperience()
         return {health: 0, disabled: true}
       } else {
         return {health: prevState.health - healthLost, error: ""}

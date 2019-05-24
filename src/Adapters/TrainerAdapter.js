@@ -98,6 +98,21 @@ class TrainerAdapter{
       .then(res => res.json())
       .catch(console.error)
   }
+
+  static addExperience(experience, money, token){
+    return fetch(API+`/trainers/experience`, {
+      method: "PATCH",
+      headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': token
+      },
+      body: JSON.stringify({ experience, money })
+    })
+    .then(res => res.json())
+    .catch(console.error)
+  }
+
 }
 
 export default TrainerAdapter

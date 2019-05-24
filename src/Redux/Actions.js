@@ -16,8 +16,6 @@ export const initializePokemons = () => {
   }
 }
 
-
-
 export const movePokemon = (pokemonId, position, moveAcrossBoolean) => {
   return (dispatch, getState) => {
     let {auth} = getState()
@@ -43,10 +41,8 @@ export const login = (id, token) => {
         dispatch(resetState())
       }else{
         dispatch(initializeTrainer(json.data.attributes))
-
         const pokemons = json.included.map(pokeball => pokeball.attributes.pokemon_information).filter(Boolean)
         const items = json.included.map(item => item.attributes.inventory_information).filter(Boolean)
-
         dispatch(initializePokemonTeam(pokemons.filter(pokemon => pokemon.onTeam)))
         dispatch(initializePokemonBox(pokemons.filter(pokemon => !pokemon.onTeam)))
         dispatch(saveItems(items))
@@ -76,7 +72,7 @@ export const persist = (token) => {
   }
 }
 
-export const evolvePokemon = (id, token) => {
+export const evolvePokemon = (id) => {
   return (dispatch, getState) => {
     let {auth} = getState()
     let token = auth.userToken
@@ -115,10 +111,19 @@ export const patchPokeball = (ballId) => {
     ItemAdapter.useBall(token, ballId)
     .then(json => dispatch(useBall(json.id)))
   }
-
 }
 
-export const raiseExperience = () => {
+export const patchExperience = (experience, money) => {
+  return (dispatch, getState) => {
+    let {auth} = getState()
+    let token = auth.userToken
+    TrainerAdapter.addExperience(experience, money, token)
+    .then((resp) => {
+      dispatch(addExperience(experience))
+      dispatch(increaseMoney(money))
+      dispatch(runAway())
+    })
+  }
 
 }
 
@@ -197,8 +202,10 @@ export const runAway = () => {
   }
 }
 
-export const catchPokemon = (pokemon, token, experience, ballId, canFitOnTeam, money) => {
-  return (dispatch) => {
+export const catchPokemon = (pokemon, experience, ballId, canFitOnTeam, money) => {
+  return (dispatch, getState) => {
+    let {auth} = getState()
+    let token = auth.userToken
     TrainerAdapter.catchPokemon(pokemon, token, experience, ballId, canFitOnTeam, money)
     .then(json => {
       if (json.error) {
