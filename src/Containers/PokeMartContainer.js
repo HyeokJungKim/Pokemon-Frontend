@@ -34,13 +34,6 @@ class PokeMartContainer extends Component{
   didPropsChange = () => {
     let stateCartQuantity = this.state.cart.map(item => item.quantity)
     let propsCartQuantity = this.props.items.map(item => item.quantity)
-    // let bool = false
-    // stateCartQuantity.forEach((quantity, index) => {
-    //   if (quantity !== propsCartQuantity[index]){
-    //     bool = true
-    //   }
-    // })
-    // return bool
     for (let i = 0; i < stateCartQuantity.length; i++) {
       if(stateCartQuantity[i] !== propsCartQuantity[i]){
         return true
@@ -71,8 +64,8 @@ class PokeMartContainer extends Component{
     let itemsToBuy = this.state.cart.map((item) => {
       return item.cartQuantity === "" || item.cartQuantity < 1 ? undefined : {id: item.id, quantity: item.cartQuantity}
     }).filter(Boolean)
-    let {buyItems, token} = this.props
-    buyItems(token, itemsToBuy)
+    let {buyItems} = this.props
+    buyItems(itemsToBuy)
   }
 
   render(){
@@ -113,7 +106,6 @@ const mapStateToProps = ({trainer, auth}) => {
   return {
     items: trainer.items,
     trainer: trainer.trainer,
-    token: auth.userToken
   }
 }
 

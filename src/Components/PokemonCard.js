@@ -27,8 +27,8 @@ class PokemonCard extends Component {
   }
 
   handleEvolution = () => {
-    const {pokemon, token, evolvePokemon} = this.props
-    evolvePokemon(pokemon.id, token)
+    const {pokemon, evolvePokemon} = this.props
+    evolvePokemon(pokemon.id)
   }
 
   render() {
@@ -59,11 +59,10 @@ class PokemonCard extends Component {
   }
 }
 
-const mapStateToProps = ({pokemons, auth}, ownProps) => {
+const mapStateToProps = ({pokemons}, ownProps) => {
   const pokemon = pokemons.all.find(pokemon => ownProps.pokemon.name === pokemon.name)
   return {
     evolutionLevel: pokemon.evolutionLevel,
-    token: auth.userToken
    }
 }
 

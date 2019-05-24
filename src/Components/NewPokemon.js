@@ -18,7 +18,7 @@ class NewPokemon extends Component {
   componentDidMount() {
     this.props.changeExpAndMoney()
   }
-
+  
   handleCatch = (ballId) => {
     const {displayedPokemon, catchPokemon, token, pokemonTeam, experience, money} = this.props
     let canFitOnTeam = pokemonTeam.length < 6

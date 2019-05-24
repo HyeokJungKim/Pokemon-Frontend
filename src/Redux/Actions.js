@@ -18,8 +18,10 @@ export const initializePokemons = () => {
 
 
 
-export const movePokemon = (pokemonId, position, token, moveAcrossBoolean) => {
-  return (dispatch) => {
+export const movePokemon = (pokemonId, position, moveAcrossBoolean) => {
+  return (dispatch, getState) => {
+    let {auth} = getState()
+    let token = auth.userToken
     TrainerAdapter.movePokemon(pokemonId, position, token, moveAcrossBoolean)
     .then(json => {
       if(json.error){
@@ -75,7 +77,9 @@ export const persist = (token) => {
 }
 
 export const evolvePokemon = (id, token) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
+    let {auth} = getState()
+    let token = auth.userToken
     TrainerAdapter.evolvePokemon(id, token)
     .then(json => {
       if (json.error) {
@@ -87,8 +91,10 @@ export const evolvePokemon = (id, token) => {
   }
 }
 
-export const buyItems = (token, itemsArray) => {
-  return (dispatch) => {
+export const buyItems = (itemsArray) => {
+  return (dispatch, getState) => {
+    let {auth} = getState()
+    let token = auth.userToken
     ItemAdapter.buyItems(token, itemsArray)
     .then(json => {
       if (json.error) {
@@ -102,11 +108,17 @@ export const buyItems = (token, itemsArray) => {
   }
 }
 
-export const patchPokeball = (token, ballId) => {
-  return (dispatch) => {
+export const patchPokeball = (ballId) => {
+  return (dispatch, getState) => {
+    let {auth} = getState()
+    let token = auth.userToken
     ItemAdapter.useBall(token, ballId)
     .then(json => dispatch(useBall(json.id)))
   }
+
+}
+
+export const raiseExperience = () => {
 
 }
 

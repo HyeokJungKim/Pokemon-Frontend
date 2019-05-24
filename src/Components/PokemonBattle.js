@@ -66,7 +66,7 @@ class PokemonBattle extends Component {
   }
 
   tryCatchPokemon = (ballId) => {
-    let {handleCatch, items, token, patchPokeball} = this.props
+    let {handleCatch, items, patchPokeball} = this.props
     let {initialHealth, health} = this.state
     let ball = items.find(ball=> ball.id === ballId)
     let randomNumber = 255
@@ -95,7 +95,7 @@ class PokemonBattle extends Component {
     if (hpFactor > randomNumber) {
       handleCatch(ballId)
     } else{
-      this.setState({error: "Aargh! Almost had it!"}, () => {patchPokeball(token, ballId)})
+      this.setState({error: "Aargh! Almost had it!"}, () => {patchPokeball(ballId)})
     }
   }
 
@@ -144,7 +144,9 @@ class PokemonBattle extends Component {
               </Grid.Column>
 
               <Grid.Column width={10}>
+
                 <Segment basic padded>
+
                   <div className='ui two buttons'>
                     <Button basic color='green' onClick={this.loseHealth} disabled={disabled}>
                       Attack
@@ -162,6 +164,7 @@ class PokemonBattle extends Component {
                       Run Away
                     </Button>
                   </div>
+
                 </Segment>
 
               </Grid.Column>
@@ -193,13 +196,12 @@ class PokemonBattle extends Component {
   }
 }
 
-const mapStateToProps = ({trainer, pokemons, auth}, ownProps) => {
+const mapStateToProps = ({trainer, pokemons}, ownProps) => {
   const pokemon = pokemons.all.find(pokemon => ownProps.pokemonFighting.name === pokemon.name)
   let items = trainer.items.filter(item => item.name.includes("Ball"))
   return {
     firstPokemonId: pokemon.id,
     pokemonTeam: trainer.pokemonTeam,
-    token: auth.userToken,
     items
   }
 }

@@ -11,7 +11,7 @@ class TeamContainer extends Component {
 
   handleDrag = (result) => {
     const {destination, source, draggableId} = result
-    const {pokemonBox, pokemonTeam, userToken} = this.props
+    const {pokemonBox, pokemonTeam} = this.props
     let position = 0
     if (!destination){return}
     else if (destination.droppableId === source.droppableId && destination.index === source.index) {return}
@@ -21,14 +21,14 @@ class TeamContainer extends Component {
         console.log("Invalid Move Because Too Many Pokemons");
       } else if (source.droppableId === "pokemonTeam") {
         position = pokemonTeam[destination.index].position
-        this.props.movePokemon(draggableId, position, userToken)
+        this.props.movePokemon(draggableId, position)
       } else {
         if (destination.index === pokemonTeam.length) {
           position = pokemonTeam[pokemonTeam.length - 1].position + 1
         } else {
           position = pokemonTeam[destination.index].position
         }
-        this.props.movePokemon(draggableId, position, userToken, true)
+        this.props.movePokemon(draggableId, position, true)
       }
 
 
@@ -36,7 +36,7 @@ class TeamContainer extends Component {
       if (pokemonTeam.length === 1 && source.droppableId === "pokemonTeam") {
       } else if(source.droppableId === "pokemonBox"){
         position = pokemonBox[destination.index].position
-        this.props.movePokemon(draggableId, position, userToken)
+        this.props.movePokemon(draggableId, position)
       }
       else {
         if (destination.index === pokemonBox.length) {
@@ -44,7 +44,7 @@ class TeamContainer extends Component {
         } else {
           position = pokemonBox[destination.index].position - 1
         }
-        this.props.movePokemon(draggableId, position, userToken, true)
+        this.props.movePokemon(draggableId, position, true)
       }
     }
   }
@@ -69,11 +69,10 @@ class TeamContainer extends Component {
   }
 }
 
-const mapStateToProps = ({trainer, auth}) => {
+const mapStateToProps = ({trainer}) => {
   return {
     pokemonTeam: trainer.pokemonTeam,
     pokemonBox: trainer.pokemonBox,
-    userToken: auth.userToken
   }
 }
 

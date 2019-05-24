@@ -15,6 +15,7 @@ const WithAuth = (WrappedComponent) => {
       }
     }
   }
+  
   return connect(mapStateToProps)(AuthComp)
 }
 
