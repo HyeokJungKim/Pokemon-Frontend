@@ -121,7 +121,7 @@ export const patchExperience = (experience, money) => {
     .then((resp) => {
       dispatch(addExperience(experience))
       dispatch(increaseMoney(money))
-      dispatch(runAway())
+      setTimeout(() => {dispatch(runAway())}, 2000)
     })
   }
 
