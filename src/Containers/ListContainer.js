@@ -12,7 +12,7 @@ const ListContainer = (props) => {
       <Fragment>
         <Header as='h2' textAlign='center'>Pokémon Team</Header>
         <List verticalAlign='middle'>
-          {props.pokemons.map((pokemon, index) => <PokemonPreview key={index} pokemon={pokemon}/>)}
+          {props.pokemons.map((pokemon, index) => <PokemonPreview key={`${pokemon.name} ${index}`} pokemon={pokemon}/>)}
         </List>
       </Fragment>
     );

@@ -8,16 +8,15 @@ import 'semantic-ui-css/semantic.min.css';
 
 import { BrowserRouter as Router} from 'react-router-dom'
 
-import {createStore, applyMiddleware, combineReducers} from 'redux'
+import {createStore, applyMiddleware, combineReducers, compose} from 'redux'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'
 import trainerReducer from './Redux/TrainerReducer'
 import authReducer from './Redux/AuthReducer'
 import pokemonReducer from './Redux/PokemonReducer'
-import { composeWithDevTools } from 'remote-redux-devtools';
 
 const rootReducer = combineReducers({trainer: trainerReducer, auth: authReducer, pokemons: pokemonReducer})
-const composeEnhancers = composeWithDevTools({ realtime: true });
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 

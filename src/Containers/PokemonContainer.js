@@ -9,7 +9,7 @@ class PokemonContainer extends PureComponent {
     return this.props.pokemons.map((pokemon, index) => {
       return (
         <PokemonCard
-          key={index}
+          key={`${pokemon.name} ${index}`}
           index={index}
           pokemon={pokemon}
         />

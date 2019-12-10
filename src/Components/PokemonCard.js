@@ -2,18 +2,34 @@ import React, { Component } from 'react';
 import {Card, Image, Button, Container} from 'semantic-ui-react'
 import {Draggable} from 'react-beautiful-dnd'
 import PokemonCardHeader from './PokemonCardHeader'
+import StoneDropdown from './StoneDropdown'
+
 import {connect} from 'react-redux'
+
 import {evolvePokemon} from '../Redux/Actions'
 
 class PokemonCard extends Component {
 
+  state = {
+    displayButton: true
+  }
+
   displayEvolveButton = () => {
-    const {evolutionLevel, pokemon} = this.props
+    let {evolutionLevels, pokemon} = this.props
+    const evolutionLevel = evolutionLevels[0]
+
     const canEvolve = pokemon.level >= evolutionLevel
-    const hasEvolution = evolutionLevel > 0
-    if (canEvolve && hasEvolution) {
+    const regularEvolution = evolutionLevel > 0
+    const hasEvolution = evolutionLevel !== 0
+    if (hasEvolution && canEvolve && regularEvolution) {
       return (
         <Button inverted color="green" onClick={this.handleEvolution}>
+          Evolve!
+        </Button>
+      )
+    } else if(hasEvolution && !regularEvolution){
+      return (
+        <Button inverted color="green" onClick={this.stoneEvolution}>
           Evolve!
         </Button>
       )
@@ -31,8 +47,14 @@ class PokemonCard extends Component {
     evolvePokemon(pokemon.id)
   }
 
+  stoneEvolution = () => {
+    this.setState((prevState) => ({displayButton: !prevState.displayButton}))
+    console.log(this.props.evolutionLevels);
+    // TODO: CREATE A DROPDOWN FOR THE STONES TO EVOLVE
+  }
+
   render() {
-    const {pokemon, index} = this.props
+    const {pokemon, index, evolutionLevels} = this.props
     return (
       <Draggable draggableId={pokemon.id} index={index}>
         {(provided) => {
@@ -47,7 +69,7 @@ class PokemonCard extends Component {
                   <p>
                     Experience: {pokemon.experience}
                   </p>
-                  {this.displayEvolveButton()}
+                  {this.state.displayButton ? this.displayEvolveButton() : <StoneDropdown evolutionLevels={evolutionLevels}/>}
                 </Container>
               </Card.Header>
             </Card.Content>
@@ -62,7 +84,7 @@ class PokemonCard extends Component {
 const mapStateToProps = ({pokemons}, ownProps) => {
   const pokemon = pokemons.all.find(pokemon => ownProps.pokemon.name === pokemon.name)
   return {
-    evolutionLevel: pokemon.evolutionLevel,
+    evolutionLevels: pokemon.evolutionLevels,
    }
 }
 
