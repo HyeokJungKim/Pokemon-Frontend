@@ -10,7 +10,7 @@ const pokemonReducer = (state = initState, action) => {
       return {...state, all: action.payload, displayedPokemon: {}}
     case "GET_RANDOM":
       const random = state.all[Math.floor(Math.random() * state.all.length)] || {}
-      random.level = Math.floor(Math.random() * 50 + 1)
+      random.level = Math.floor(Math.random() * 25 + 1)
       return {...state, displayedPokemon: random}
     case "RUN_AWAY":
       return {...state, displayedPokemon: {}}

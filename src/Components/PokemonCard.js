@@ -21,7 +21,7 @@ class PokemonCard extends Component {
     const canEvolve = pokemon.level >= evolutionLevel
     const regularEvolution = evolutionLevel > 0
     const hasEvolution = evolutionLevel !== 0
-    if (hasEvolution && canEvolve && regularEvolution) {
+    if ((hasEvolution && canEvolve && regularEvolution) || evolutionLevel === -6) {
       return (
         <Button inverted color="green" onClick={this.handleEvolution}>
           Evolve!
@@ -49,8 +49,6 @@ class PokemonCard extends Component {
 
   stoneEvolution = () => {
     this.setState((prevState) => ({displayButton: !prevState.displayButton}))
-    console.log(this.props.evolutionLevels);
-    // TODO: CREATE A DROPDOWN FOR THE STONES TO EVOLVE
   }
 
   render() {
@@ -69,7 +67,7 @@ class PokemonCard extends Component {
                   <p>
                     Experience: {pokemon.experience}
                   </p>
-                  {this.state.displayButton ? this.displayEvolveButton() : <StoneDropdown evolutionLevels={evolutionLevels}/>}
+                  {this.state.displayButton ? this.displayEvolveButton() : <StoneDropdown pokemon_id={pokemon.id} evolutionLevels={evolutionLevels}/>}
                 </Container>
               </Card.Header>
             </Card.Content>

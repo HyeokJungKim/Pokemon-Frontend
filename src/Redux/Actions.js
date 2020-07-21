@@ -87,6 +87,26 @@ export const evolvePokemon = (id) => {
   }
 }
 
+export const stoneEvolve = (id, evolution_id) => {
+  return (dispatch, getState) => {
+    let {auth} = getState()
+    let token = auth.userToken
+    TrainerAdapter.stoneEvolve(id, evolution_id, token)
+    .then((json) => {
+      if (json.error) {
+        dispatch(resetState())
+      } else{
+        dispatch(initializeTrainer(json.data.attributes))
+        const pokemons = json.included.map(pokeball => pokeball.attributes.pokemon_information).filter(Boolean)
+        const items = json.included.map(item => item.attributes.inventory_information).filter(Boolean)
+        dispatch(initializePokemonTeam(pokemons.filter(pokemon => pokemon.onTeam)))
+        dispatch(initializePokemonBox(pokemons.filter(pokemon => !pokemon.onTeam)))
+        dispatch(saveItems(items))
+      }
+    })
+  }
+}
+
 export const buyItems = (itemsArray) => {
   return (dispatch, getState) => {
     let {auth} = getState()

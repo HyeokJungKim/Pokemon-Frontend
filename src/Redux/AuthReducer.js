@@ -10,7 +10,7 @@ const authReducer = (state = initState, action) => {
     case "TOGGLE_LOADING":
       return {...state, loading: action.payload}
     case "RESET_STATE":
-      return initState
+      return {...initState, loading: false}
     default:
       return state
   }

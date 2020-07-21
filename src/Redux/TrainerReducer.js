@@ -23,7 +23,7 @@ const trainerReducer = (state = initState, action) => {
     case "INITIALIZE_POKEMON_BOX":
       return {...state, pokemonBox: action.payload}
     case "RESET_STATE":
-      return initState
+      return {...initState}
     case "INCREASE_MONEY":
       return {...state, trainer: {...state.trainer, money: state.trainer.money + action.payload}}
     case "CATCH_POKEMON":

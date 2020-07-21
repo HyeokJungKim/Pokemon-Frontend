@@ -17,12 +17,12 @@ class App extends Component {
     this.props.initializePokemons()
   }
 
-  whatToDisplay = (props) => {
-    switch (props.location.pathname) {
+  whatToDisplay = (routerProps) => {
+    switch (routerProps.location.pathname) {
       case "/login":
-        return <LoginForm {...props}/>
+        return <LoginForm {...routerProps}/>
       case "/register":
-        return <RegisterForm {...props}/>
+        return <RegisterForm {...routerProps}/>
       case "/":
         return <About/>
       default:
@@ -30,14 +30,19 @@ class App extends Component {
     }
   }
 
+  decideContainer = (routerProps) => {
+    return <HomeContainer {...routerProps} whatToDisplay={this.whatToDisplay}/>
+  }
+
+
   render() {
     return (
       <Switch>
-        <Route path='/login' render={(props) => <HomeContainer {...props} whatToDisplay={this.whatToDisplay}/>}/>
-        <Route path='/register' render={(props) => <HomeContainer {...props} whatToDisplay={this.whatToDisplay} />}/>
+        <Route path='/login' render={this.decideContainer}/>
+        <Route path='/register' render={this.decideContainer}/>
         <Route path='/home' render={(props) => <GameContainer {...props}/>}/>
-        <Route path='/' exact render={(props) => <HomeContainer {...props} whatToDisplay={this.whatToDisplay}/>}/>
-        <Route path='/' render={(props) => <HomeContainer {...props} whatToDisplay={this.whatToDisplay}/>}/>
+        <Route path='/' exact render={this.decideContainer}/>
+        <Route path='/' render={this.decideContainer}/>
 
       </Switch>
     );

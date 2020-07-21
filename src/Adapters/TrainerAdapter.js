@@ -99,6 +99,17 @@ class TrainerAdapter{
       .catch(console.error)
   }
 
+  static stoneEvolve(id, stone_id, token){
+    return fetch(API+`/pokeballs/${id}/stone_evolve/${stone_id}`, {
+      method: "PATCH",
+      headers:{
+        'Accept': 'application/json',
+        'Authorization': token
+      }})
+      .then(res => res.json())
+      .catch(console.error)
+  }
+
   static addExperience(experience, money, token){
     return fetch(API+`/trainers/experience`, {
       method: "PATCH",
