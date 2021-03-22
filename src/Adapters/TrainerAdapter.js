@@ -1,4 +1,4 @@
-const API = "http://localhost:3000"
+const API = "https://pokemon-stay-backend.herokuapp.com/"
 
 class TrainerAdapter{
   static login(data){
