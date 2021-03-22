@@ -39,7 +39,7 @@ Gather money and experience as you battle or catch Pokemon to buy items from the
 
 Organize your box and your team to strategically figure out how to level up your team.
 
-![Team](https://i.imgur.com/sqtIXRU.gif)
+![Team](https://i.imgur.com/Lyg2U5M.gif)
 
 ## Setup
 1. Make sure that `node` is installed on your local machine.
