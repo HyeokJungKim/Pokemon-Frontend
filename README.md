@@ -3,6 +3,13 @@ A React application inspired by the main series Pokemon games that implements dr
 
 Explore Online: <https://pokemon-stay.netlify.app/>  
 
+If you would like to explore the app without creating an account, please feel free to use the following credentials to login:
+
+```
+Username: Trainer
+Password: abc132
+```
+
 ## Language and Tools
 
 ### React 
@@ -23,9 +30,16 @@ Explore Online: <https://pokemon-stay.netlify.app/>
 ## About
 Enter the exciting world of Pokemon through this React+Redux application. See all of the first 150 Pokemons as you explore the map using the WASD keys!
 
+![Map](https://i.imgur.com/sE6LBmU.png)
+
 Gather money and experience as you battle or catch Pokemon to buy items from the PokeMart and evolve your team.
 
+![Battle](https://i.imgur.com/QC012q5.png)
+![Shop](https://i.imgur.com/z1VesC9.png)
+
 Organize your box and your team to strategically figure out how to level up your team.
+
+![Team](https://i.imgur.com/sqtIXRU.gif)
 
 ## Setup
 1. Make sure that `node` is installed on your local machine.
