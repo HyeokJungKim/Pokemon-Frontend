@@ -1,8 +1,8 @@
-const API = "https://pokemon-stay-backend.herokuapp.com/"
+const API = "https://pokemon-stay-backend.herokuapp.com"
 
 class ItemAdapter{
   static buyItems(token, itemsArray){
-    return fetch(API+"inventories", {
+    return fetch(API+"/inventories", {
       method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ class ItemAdapter{
   }
 
   static useBall(token, ballId){
-    return fetch(API+`inventories/${ballId}`, {
+    return fetch(API+`/inventories/${ballId}`, {
       method: "PATCH",
       headers: {
         'Accept': 'application/json',

@@ -1,4 +1,4 @@
-const API = "https://pokemon-stay-backend.herokuapp.com/"
+const API = "https://pokemon-stay-backend.herokuapp.com"
 
 class TrainerAdapter{
   static login(data){
@@ -15,7 +15,7 @@ class TrainerAdapter{
   }
 
   static register(data){
-    return fetch(`${API}/users`, {
+    return fetch(`${API}/trainers`, {
       method: "POST",
       headers:{
         'Content-Type': 'application/json',

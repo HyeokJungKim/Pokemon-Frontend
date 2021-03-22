@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {Segment, Container, Form, Input, Button, Header} from 'semantic-ui-react'
+import {connect} from 'react-redux'
+import {initializeToken, login} from '../Redux/Actions'
+import TrainerAdapter from '../Adapters/TrainerAdapter'
 
 const initialState = {
   username:"",
@@ -19,7 +22,20 @@ class RegisterForm extends Component {
     this.setState({[event.target.name]: event.target.value})
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault()
+    TrainerAdapter.register(this.state)
+    .then(json => {
+      if(json.error){
+        this.setState({error: json.error})
+      }else{
+        localStorage.setItem("token", json.token)
+        this.props.initializeToken(json.token)
+        this.props.login(json.id, json.token)
+        this.props.history.push("/home")
+      }
+    })
+    this.setState(initialState)
 
   }
 
@@ -53,4 +69,4 @@ class RegisterForm extends Component {
   }
 }
 
-export default RegisterForm;
+export default connect(null, {initializeToken, login})(RegisterForm);

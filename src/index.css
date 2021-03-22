@@ -412,11 +412,6 @@ body{
 }
 
 
-.ui.basic.segment.bordered{
-  border-style: solid;
-  border-color: red;
-}
-
 #pokemon-info{
   margin: 0px;
   padding: 0px;
