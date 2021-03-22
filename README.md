@@ -15,8 +15,10 @@ Explore Online: <https://pokemon-stay.netlify.app/>
 - [Redux](https://redux.js.org/)
 - [Redux-Thunk](https://github.com/reduxjs/redux-thunk)
 
-### Rails API
-- [Rails Repo](https://github.com/HyeokJungKim/Pokemon-Backend)
+### [Rails API](https://github.com/HyeokJungKim/Pokemon-Backend)
+- [Redis](https://github.com/redis-store/redis-rails)
+- [Postgres](https://www.postgresql.org/)
+- [Fast JSONAPI](https://github.com/Netflix/fast_jsonapi)
 
 ## About
 Enter the exciting world of Pokemon through this React+Redux application. See all of the first 150 Pokemons as you explore the map using the WASD keys!
