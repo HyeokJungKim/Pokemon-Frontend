@@ -7,7 +7,7 @@ If you would like to explore the app without creating an account, please feel fr
 
 ```
 Username: Trainer
-Password: abc132
+Password: abc123
 ```
 
 ## Language and Tools
@@ -24,6 +24,7 @@ Password: abc132
 
 ### [Rails API](https://github.com/HyeokJungKim/Pokemon-Backend)
 - [Redis](https://github.com/redis-store/redis-rails)
+- [JWT](https://jwt.io/)
 - [Postgres](https://www.postgresql.org/)
 - [Fast JSONAPI](https://github.com/Netflix/fast_jsonapi)
 
@@ -61,6 +62,3 @@ brew install node
 npm start
 ```
 
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
