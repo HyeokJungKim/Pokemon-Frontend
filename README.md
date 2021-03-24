@@ -13,20 +13,19 @@ Password: abc123
 ## Language and Tools
 
 ### React 
-- [Create React App](https://github.com/facebook/create-react-app)
-- [React-Router](https://reactrouter.com/)
-- [Semantic UI React](https://react.semantic-ui.com/)
-- [React Beautiful DND](https://github.com/atlassian/react-beautiful-dnd)
+- [React-Router](https://reactrouter.com/) - [Example](https://github.com/HyeokJungKim/Pokemon-Frontend/blob/master/src/App.js#L40)
+- [Semantic UI React](https://react.semantic-ui.com/) - [Example](https://github.com/HyeokJungKim/Pokemon-Frontend/blob/master/src/Containers/HomeContainer.js#L4)
+- [React Beautiful DND](https://github.com/atlassian/react-beautiful-dnd) - [Example](https://github.com/HyeokJungKim/Pokemon-Frontend/blob/master/src/Containers/TeamContainer.js#L54)
 
 ### Redux
-- [Redux](https://redux.js.org/)
-- [Redux-Thunk](https://github.com/reduxjs/redux-thunk)
+- [Redux](https://redux.js.org/) - [Example](https://github.com/HyeokJungKim/Pokemon-Frontend/blob/master/src/index.js#L18)
+- [Redux-Thunk](https://github.com/reduxjs/redux-thunk) - [Example](https://github.com/HyeokJungKim/Pokemon-Frontend/blob/master/src/Redux/Actions.js#L5)
 
 ### [Rails API](https://github.com/HyeokJungKim/Pokemon-Backend)
-- [Redis](https://github.com/redis-store/redis-rails)
-- [JWT](https://jwt.io/)
-- [Postgres](https://www.postgresql.org/)
-- [Fast JSONAPI](https://github.com/Netflix/fast_jsonapi)
+- [Redis](https://github.com/redis-store/redis-rails) - [Example](https://github.com/HyeokJungKim/Pokemon-Backend/blob/master/app/controllers/pokemons_controller.rb#L3)
+- [JWT](https://jwt.io/) - [Example](https://github.com/HyeokJungKim/Pokemon-Backend/blob/master/app/controllers/application_controller.rb#L10)
+- [Fast JSONAPI](https://github.com/Netflix/fast_jsonapi) - [Example](https://github.com/HyeokJungKim/Pokemon-Backend/blob/master/app/serializers/trainer_serializer.rb#L1)
+- [Postgres](https://www.postgresql.org/) - [Example](https://github.com/HyeokJungKim/Pokemon-Backend/blob/master/config/database.yml#L18)
 
 ## About
 Enter the exciting world of Pokemon through this React+Redux application. See all of the first 150 Pokemons as you explore the map using the WASD keys!
