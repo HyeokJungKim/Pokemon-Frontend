@@ -56,7 +56,12 @@ brew install node
  cd Pokemon-Frontend
 ```
 
-3. Start the app on <http://localhost:3000/>
+3. Download all the dependencies.
+```
+npm install
+```
+
+4. Start the app on <http://localhost:3000/>
 ```
 npm start
 ```
