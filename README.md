@@ -49,7 +49,7 @@ If you're using [Homebrew](https://brew.sh/)
 brew install node
 ```
 
-2. Clone down the project and install the dependencies.
+2. Clone down the project.
 
 ```
  git clone git@github.com:HyeokJungKim/Pokemon-Frontend.git
@@ -61,7 +61,7 @@ brew install node
 npm install
 ```
 
-4. Start the app on <http://localhost:3000/>
+4. Start the app on <http://localhost:3000/>.
 ```
 npm start
 ```
